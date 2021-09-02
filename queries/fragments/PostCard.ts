@@ -6,6 +6,28 @@ export const PostCardFragment = gql`
     slug
     title
     date
+    modified
+    author {
+      node {
+        id
+        name
+      }
+    }
+    categories {
+      nodes {
+        id
+        link
+        name
+      }
+    }
+    tags {
+      nodes {
+        id
+        link
+        name
+      }
+    }
+    link
     featuredImage {
       node {
         sourceUrl

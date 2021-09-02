@@ -1,4 +1,4 @@
-import { ProductCardListFragment } from '../../generated/graphql'
+import { ProductCardListFragment } from '../generated/graphql'
 import { ProductCard } from './ProductCard'
 
 export function ProductCardList({ data }: { data: ProductCardListFragment }) {

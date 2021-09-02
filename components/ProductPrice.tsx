@@ -1,4 +1,4 @@
-import { ProductCardFragment } from '../../generated/graphql'
+import { ProductCardFragment } from '../generated/graphql'
 
 export function ProductPrice({ entity }: { entity: ProductCardFragment }) {
   if (entity.__typename === 'GroupProduct') {

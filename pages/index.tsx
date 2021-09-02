@@ -2,9 +2,9 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { host } from '../config'
 import { HomePageQuery } from '../generated/graphql'
-import { PostCard } from './components/PostCard'
-import { PostCardList } from './components/PostCardList'
-import { ProductCardList } from './components/ProductCardList'
+import { PostCard } from '../components/PostCard'
+import { PostCardList } from '../components/PostCardList'
+import { ProductCardList } from '../components/ProductCardList'
 
 const Home: NextPage<{ data: HomePageQuery }> = ({ data }) => {
   return (

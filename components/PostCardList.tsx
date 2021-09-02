@@ -1,4 +1,4 @@
-import { PostCardListFragment } from '../../generated/graphql'
+import { PostCardListFragment } from '../generated/graphql'
 import { PostCard } from './PostCard'
 
 export function PostCardList({ data }: { data: PostCardListFragment }) {
