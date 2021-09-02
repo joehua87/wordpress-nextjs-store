@@ -1,0 +1,9 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "files.exclude": {
+    ".next": true,
+    "node_modules": true
+  },
+  "css.validate": false,
+  "editor.formatOnSave": true
+}

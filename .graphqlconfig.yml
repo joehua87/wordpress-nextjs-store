@@ -1,0 +1,19 @@
+schema: ./schema/schema.graphql
+# schema: http://docker:8080/index.php?graphql
+extensions:
+  codegen:
+    generates:
+      schema/schema.graphql:
+        plugins:
+          - schema-ast
+        config:
+          commentDescriptions: true
+
+      generated/graphql.ts:
+        documents: "{queries,pages}/**/*.{gql,ts,tsx}"
+        plugins:
+          - typescript
+          - typescript-operations
+        config:
+          preResolveTypes: true
+          exportFragmentSpreadSubTypes: true
