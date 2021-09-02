@@ -16,7 +16,8 @@
     "preact-render-to-string": "^5.1.19",
     "react": "npm:@preact/compat@^17.0.2",
     "react-dom": "npm:@preact/compat@^17.0.2",
-    "react-ssr-prepass": "npm:preact-ssr-prepass@^1.2.0"
+    "react-ssr-prepass": "npm:preact-ssr-prepass@^1.2.0",
+    "topbar": "^1.0.1"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.2.1",

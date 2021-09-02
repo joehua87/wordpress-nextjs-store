@@ -1,6 +1,18 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Link from 'next/link'
+import Router from 'next/router'
+
+if (typeof window !== 'undefined') {
+  import('topbar').then(({ default: topbar }) => {
+    Router.events.on('routeChangeStart', (url) => {
+      console.log(`Loading: ${url}`)
+      topbar.show()
+    })
+    Router.events.on('routeChangeComplete', () => topbar.hide())
+    Router.events.on('routeChangeError', () => topbar.hide())
+  })
+}
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
