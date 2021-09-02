@@ -4,6 +4,7 @@ export const ProductCardFragment = gql`
   fragment ProductCard on Product {
     id
     slug
+    link
     name
     featured
     image {
