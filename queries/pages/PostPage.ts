@@ -1,4 +1,5 @@
 import { gql } from '@urql/core'
+import { EntitySeoFragment } from '../fragments/EntitySeo'
 
 export const PostPageQuery = gql`
   query PostPage($slug: ID!) {
@@ -13,21 +14,9 @@ export const PostPageQuery = gql`
       }
       content(format: RENDERED)
       seo {
-        title
-        metaDesc
-        metaKeywords
-        opengraphDescription
-        opengraphImage {
-          sourceUrl
-        }
-        breadcrumbs {
-          text
-          url
-        }
-        schema {
-          raw
-        }
+        ...EntitySeo
       }
     }
   }
+  ${EntitySeoFragment}
 `

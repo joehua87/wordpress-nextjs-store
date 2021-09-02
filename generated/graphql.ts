@@ -12404,6 +12404,8 @@ export type WritingSettings = {
   useSmilies?: Maybe<Scalars['Boolean']>;
 };
 
+export type EntitySeoFragment = { __typename?: 'PostTypeSEO', title?: Maybe<string>, metaDesc?: Maybe<string>, metaKeywords?: Maybe<string>, opengraphDescription?: Maybe<string>, opengraphImage?: Maybe<{ __typename?: 'MediaItem', sourceUrl?: Maybe<string> }>, breadcrumbs?: Maybe<Array<Maybe<{ __typename?: 'SEOPostTypeBreadcrumbs', text?: Maybe<string>, url?: Maybe<string> }>>>, schema?: Maybe<{ __typename?: 'SEOPostTypeSchema', raw?: Maybe<string> }> };
+
 export type PostCardFragment = { __typename: 'Post', id: string, slug?: Maybe<string>, title?: Maybe<string>, date?: Maybe<string>, modified?: Maybe<string>, link?: Maybe<string>, author?: Maybe<{ __typename?: 'NodeWithAuthorToUserConnectionEdge', node?: Maybe<{ __typename?: 'User', id: string, name?: Maybe<string> }> }>, categories?: Maybe<{ __typename?: 'PostToCategoryConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Category', id: string, link?: Maybe<string>, name?: Maybe<string> }>>> }>, tags?: Maybe<{ __typename?: 'PostToTagConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Tag', id: string, link?: Maybe<string>, name?: Maybe<string> }>>> }>, featuredImage?: Maybe<{ __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: Maybe<{ __typename?: 'MediaItem', sourceUrl?: Maybe<string> }> }> };
 
 export type PostCardListFragment = { __typename?: 'RootQueryToPostConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'RootQueryToPostConnectionEdge', node?: Maybe<(
@@ -12451,4 +12453,7 @@ export type PostPageQueryVariables = Exact<{
 }>;
 
 
-export type PostPageQuery = { __typename?: 'RootQuery', post?: Maybe<{ __typename?: 'Post', id: string, slug?: Maybe<string>, title?: Maybe<string>, content?: Maybe<string>, featuredImage?: Maybe<{ __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: Maybe<{ __typename?: 'MediaItem', sourceUrl?: Maybe<string> }> }>, seo?: Maybe<{ __typename?: 'PostTypeSEO', title?: Maybe<string>, metaDesc?: Maybe<string>, metaKeywords?: Maybe<string>, opengraphDescription?: Maybe<string>, opengraphImage?: Maybe<{ __typename?: 'MediaItem', sourceUrl?: Maybe<string> }>, breadcrumbs?: Maybe<Array<Maybe<{ __typename?: 'SEOPostTypeBreadcrumbs', text?: Maybe<string>, url?: Maybe<string> }>>>, schema?: Maybe<{ __typename?: 'SEOPostTypeSchema', raw?: Maybe<string> }> }> }> };
+export type PostPageQuery = { __typename?: 'RootQuery', post?: Maybe<{ __typename?: 'Post', id: string, slug?: Maybe<string>, title?: Maybe<string>, content?: Maybe<string>, featuredImage?: Maybe<{ __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: Maybe<{ __typename?: 'MediaItem', sourceUrl?: Maybe<string> }> }>, seo?: Maybe<(
+      { __typename?: 'PostTypeSEO' }
+      & EntitySeoFragment
+    )> }> };
