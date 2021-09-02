@@ -12404,6 +12404,13 @@ export type WritingSettings = {
   useSmilies?: Maybe<Scalars['Boolean']>;
 };
 
+export type PostCardFragment = { __typename: 'Post', id: string, slug?: Maybe<string>, title?: Maybe<string>, date?: Maybe<string>, featuredImage?: Maybe<{ __typename?: 'NodeWithFeaturedImageToMediaItemConnectionEdge', node?: Maybe<{ __typename?: 'MediaItem', sourceUrl?: Maybe<string> }> }> };
+
+export type PostCardListFragment = { __typename?: 'RootQueryToPostConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'RootQueryToPostConnectionEdge', node?: Maybe<(
+      { __typename?: 'Post' }
+      & PostCardFragment
+    )> }>>> };
+
 export type ProductCard_ExternalProduct_Fragment = { __typename: 'ExternalProduct', salePrice?: Maybe<string>, regularPrice?: Maybe<string>, price?: Maybe<string>, id: string, slug?: Maybe<string>, name?: Maybe<string>, featured?: Maybe<boolean>, image?: Maybe<{ __typename?: 'MediaItem', sourceUrl?: Maybe<string> }>, attributes?: Maybe<{ __typename?: 'ProductToProductAttributeConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'GlobalProductAttribute', id: string, label: string, name: string } | { __typename?: 'LocalProductAttribute', id: string, label: string, name: string }>>> }> };
 
 export type ProductCard_GroupProduct_Fragment = { __typename: 'GroupProduct', id: string, slug?: Maybe<string>, name?: Maybe<string>, featured?: Maybe<boolean>, image?: Maybe<{ __typename?: 'MediaItem', sourceUrl?: Maybe<string> }>, attributes?: Maybe<{ __typename?: 'ProductToProductAttributeConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'GlobalProductAttribute', id: string, label: string, name: string } | { __typename?: 'LocalProductAttribute', id: string, label: string, name: string }>>> }> };
@@ -12431,7 +12438,10 @@ export type ProductCardListFragment = { __typename?: 'ProductCategoryToProductCo
 export type HomePageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type HomePageQuery = { __typename?: 'RootQuery', allSettings?: Maybe<{ __typename?: 'Settings', generalSettingsTitle?: Maybe<string>, generalSettingsDescription?: Maybe<string> }>, productCategories?: Maybe<{ __typename?: 'RootQueryToProductCategoryConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'RootQueryToProductCategoryConnectionEdge', node?: Maybe<{ __typename?: 'ProductCategory', id: string, name?: Maybe<string>, products?: Maybe<(
+export type HomePageQuery = { __typename?: 'RootQuery', allSettings?: Maybe<{ __typename?: 'Settings', generalSettingsTitle?: Maybe<string>, generalSettingsDescription?: Maybe<string> }>, posts?: Maybe<(
+    { __typename?: 'RootQueryToPostConnection' }
+    & PostCardListFragment
+  )>, productCategories?: Maybe<{ __typename?: 'RootQueryToProductCategoryConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'RootQueryToProductCategoryConnectionEdge', node?: Maybe<{ __typename?: 'ProductCategory', id: string, name?: Maybe<string>, products?: Maybe<(
           { __typename?: 'ProductCategoryToProductConnection' }
           & ProductCardListFragment
         )> }> }>>>, pageInfo?: Maybe<{ __typename?: 'WPPageInfo', startCursor?: Maybe<string>, hasPreviousPage: boolean, hasNextPage: boolean, endCursor?: Maybe<string> }> }> };

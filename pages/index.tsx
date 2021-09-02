@@ -1,21 +1,10 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { host } from '../config'
-import { HomePageQuery, ProductCardListFragment } from '../generated/graphql'
-import { ProductCard } from './components/ProductCard'
-
-function ProductCardList({ data }: { data: ProductCardListFragment }) {
-  return (
-    <div className="grid gap-2 grid-cols-2 lg:gap-4 lg:grid-cols-4 xl:grid-cols-6">
-      {data.edges?.map(
-        (product) =>
-          product?.node && (
-            <ProductCard key={product.node.id} entity={product.node} />
-          ),
-      )}
-    </div>
-  )
-}
+import { HomePageQuery } from '../generated/graphql'
+import { PostCard } from './components/PostCard'
+import { PostCardList } from './components/PostCardList'
+import { ProductCardList } from './components/ProductCardList'
 
 const Home: NextPage<{ data: HomePageQuery }> = ({ data }) => {
   return (
@@ -27,6 +16,7 @@ const Home: NextPage<{ data: HomePageQuery }> = ({ data }) => {
           content={data.allSettings?.generalSettingsDescription || ''}
         />
       </Head>
+      {data.posts && <PostCardList data={data.posts} />}
       <div>
         {data.productCategories?.edges?.map((item) => {
           if (!item?.node?.products) {
