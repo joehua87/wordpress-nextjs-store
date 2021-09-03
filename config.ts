@@ -1,2 +1,2 @@
 export const graphqlEndpoint =
-  'http://admin.wordpress-demo.dew.vn/index.php?graphql'
+  'https://admin.wordpress-demo.dew.vn/index.php?graphql'
