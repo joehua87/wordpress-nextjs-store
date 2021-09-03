@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import type { GetServerSidePropsContext, NextPage } from 'next'
 import { ProductPageQuery } from '../../generated/graphql'
 import { EntitySeo } from '../../components/EntitySeo'
@@ -12,13 +11,12 @@ const Product: NextPage<{ data: ProductPageQuery }> = ({ data }) => {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
         {data.product?.galleryImages?.nodes?.map((item) => (
           <div key={item?.sourceUrl} className="relative aspect-w-1 aspect-h-1">
-            <Image
+            <img
               src={
                 item?.sourceUrl ||
                 'http://docker:8080/wp-content/uploads/woocommerce-placeholder.png'
               }
               alt={data.product?.name || undefined}
-              layout="fill"
             />
           </div>
         ))}
