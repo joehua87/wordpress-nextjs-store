@@ -1,11 +1,13 @@
-import type { GetServerSidePropsContext, NextPage } from 'next'
+import type { NextPage } from 'next'
 import Head from 'next/head'
-import { HomePageQuery } from '../generated/graphql'
+import type { HomePageQuery as THomePageQuery } from '../generated/graphql'
 import { PostCardList } from '../components/PostCardList'
 import { ProductCardList } from '../components/ProductCardList'
 import { edgesToList, getHost } from '../utils'
+import { graphqlEndpoint } from '../config'
+import { HomePageQuery } from '../queries/pages/HomePage'
 
-const Home: NextPage<{ data: HomePageQuery }> = ({ data }) => {
+const Home: NextPage<{ data: THomePageQuery }> = ({ data }) => {
   return (
     <div className="container mx-auto">
       <Head>
@@ -36,8 +38,21 @@ const Home: NextPage<{ data: HomePageQuery }> = ({ data }) => {
 
 export default Home
 
+/*
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const res = await fetch(`${getHost(context)}/api`)
   const { data } = await res.json()
+  return { props: { data } }
+}
+*/
+export async function getStaticProps() {
+  const response = await fetch(graphqlEndpoint, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'post',
+    body: JSON.stringify({ query: HomePageQuery.loc?.source.body }),
+  })
+  const { data } = await response.json()
   return { props: { data } }
 }
