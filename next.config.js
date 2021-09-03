@@ -4,6 +4,6 @@ const withPreact = require('next-plugin-preact')
 module.exports = withPreact({
   reactStrictMode: true,
   images: {
-    domains: ['docker'],
+    domains: ['docker', 'admin.wordpress-demo.dew.vn'],
   },
 })

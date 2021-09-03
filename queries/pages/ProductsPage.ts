@@ -23,11 +23,6 @@ export const ProductsPageQuery = gql`
           name
           count
         }
-        ... on PaWidth {
-          id
-          name
-          count
-        }
         slug
       }
     }
