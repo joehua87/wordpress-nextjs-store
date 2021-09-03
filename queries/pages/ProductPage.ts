@@ -10,6 +10,11 @@ export const ProductPageQuery = gql`
       image {
         sourceUrl
       }
+      galleryImages {
+        nodes {
+          sourceUrl(size: LARGE)
+        }
+      }
       attributes {
         nodes {
           id
