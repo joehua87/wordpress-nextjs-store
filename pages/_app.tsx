@@ -22,6 +22,12 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Link href="/">
             <a>Home</a>
           </Link>
+          <Link href="/products">
+            <a className="ml-2">Products</a>
+          </Link>
+          <Link href="/posts">
+            <a className="ml-2">Posts</a>
+          </Link>
         </nav>
       </header>
       <main className="mt-8">

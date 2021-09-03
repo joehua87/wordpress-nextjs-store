@@ -12458,6 +12458,16 @@ export type PostPageQuery = { __typename?: 'RootQuery', post?: Maybe<{ __typenam
       & EntitySeoFragment
     )> }> };
 
+export type PostsPageQueryVariables = Exact<{
+  where?: Maybe<RootQueryToPostConnectionWhereArgs>;
+}>;
+
+
+export type PostsPageQuery = { __typename?: 'RootQuery', posts?: Maybe<{ __typename?: 'RootQueryToPostConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'RootQueryToPostConnectionEdge', node?: Maybe<(
+        { __typename?: 'Post' }
+        & PostCardFragment
+      )> }>>>, pageInfo?: Maybe<{ __typename?: 'WPPageInfo', total?: Maybe<number> }> }> };
+
 export type ProductPageQueryVariables = Exact<{
   slug: Scalars['ID'];
 }>;
@@ -12476,3 +12486,22 @@ export type ProductPageQuery = { __typename: 'RootQuery', product?: Maybe<{ __ty
       { __typename?: 'PostTypeSEO' }
       & EntitySeoFragment
     )> }> };
+
+export type ProductsPageQueryVariables = Exact<{
+  where?: Maybe<RootQueryToProductConnectionWhereArgs>;
+}>;
+
+
+export type ProductsPageQuery = { __typename?: 'RootQuery', terms?: Maybe<{ __typename?: 'RootQueryToTermNodeConnection', pageInfo?: Maybe<{ __typename?: 'WPPageInfo', total?: Maybe<number> }>, nodes?: Maybe<Array<Maybe<{ __typename: 'Category', id: string, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, name?: Maybe<string>, slug?: Maybe<string> } | { __typename: 'PaColor', id: string, name?: Maybe<string>, count?: Maybe<number>, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, slug?: Maybe<string> } | { __typename: 'PaSize', id: string, name?: Maybe<string>, count?: Maybe<number>, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, slug?: Maybe<string> } | { __typename: 'PaWidth', id: string, name?: Maybe<string>, count?: Maybe<number>, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, slug?: Maybe<string> } | { __typename: 'PostFormat', id: string, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, name?: Maybe<string>, slug?: Maybe<string> } | { __typename: 'ProductCategory', id: string, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, name?: Maybe<string>, slug?: Maybe<string> } | { __typename: 'ProductTag', id: string, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, name?: Maybe<string>, slug?: Maybe<string> } | { __typename: 'ProductType', id: string, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, name?: Maybe<string>, slug?: Maybe<string> } | { __typename: 'ShippingClass', id: string, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, name?: Maybe<string>, slug?: Maybe<string> } | { __typename: 'Tag', id: string, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, name?: Maybe<string>, slug?: Maybe<string> } | { __typename: 'VisibleProduct', id: string, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, name?: Maybe<string>, slug?: Maybe<string> }>>> }>, products?: Maybe<{ __typename?: 'RootQueryToProductConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'RootQueryToProductConnectionEdge', node?: Maybe<(
+        { __typename?: 'ExternalProduct' }
+        & ProductCard_ExternalProduct_Fragment
+      ) | (
+        { __typename?: 'GroupProduct' }
+        & ProductCard_GroupProduct_Fragment
+      ) | (
+        { __typename?: 'SimpleProduct' }
+        & ProductCard_SimpleProduct_Fragment
+      ) | (
+        { __typename?: 'VariableProduct' }
+        & ProductCard_VariableProduct_Fragment
+      )> }>>>, pageInfo?: Maybe<{ __typename?: 'WPPageInfo', total?: Maybe<number> }> }> };
