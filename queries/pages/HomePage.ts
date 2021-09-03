@@ -8,7 +8,7 @@ export const HomePageQuery = gql`
       generalSettingsTitle
       generalSettingsDescription
     }
-    posts {
+    posts(first: 6) {
       ...PostCardList
     }
     productCategories {
@@ -16,7 +16,7 @@ export const HomePageQuery = gql`
         node {
           id
           name
-          products {
+          products(first: 6) {
             ...ProductCardList
           }
         }
