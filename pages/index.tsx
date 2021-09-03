@@ -1,10 +1,9 @@
-import type { NextPage } from 'next'
+import type { GetServerSidePropsContext, NextPage } from 'next'
 import Head from 'next/head'
-import { host } from '../config'
 import { HomePageQuery } from '../generated/graphql'
 import { PostCardList } from '../components/PostCardList'
 import { ProductCardList } from '../components/ProductCardList'
-import { edgesToList } from '../utils'
+import { edgesToList, getHost } from '../utils'
 
 const Home: NextPage<{ data: HomePageQuery }> = ({ data }) => {
   return (
@@ -37,8 +36,8 @@ const Home: NextPage<{ data: HomePageQuery }> = ({ data }) => {
 
 export default Home
 
-export async function getServerSideProps() {
-  const res = await fetch(`${host}/api`)
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const res = await fetch(`${getHost(context)}/api`)
   const { data } = await res.json()
   return { props: { data } }
 }

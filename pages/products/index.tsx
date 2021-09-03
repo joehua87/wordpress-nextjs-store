@@ -1,8 +1,7 @@
-import type { NextPage } from 'next'
+import type { GetServerSidePropsContext, NextPage } from 'next'
 import { ProductCardList } from '../../components/ProductCardList'
-import { host } from '../../config'
 import { ProductsPageQuery } from '../../generated/graphql'
-import { edgesToList } from '../../utils'
+import { edgesToList, getHost } from '../../utils'
 
 const Products: NextPage<{ data: ProductsPageQuery }> = ({ data }) => {
   return (
@@ -14,8 +13,8 @@ const Products: NextPage<{ data: ProductsPageQuery }> = ({ data }) => {
 
 export default Products
 
-export async function getServerSideProps() {
-  const res = await fetch(`${host}/api/products`)
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const res = await fetch(`${getHost(context)}/api/products`)
   const { data } = await res.json()
   return { props: { data } }
 }

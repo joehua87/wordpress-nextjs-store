@@ -1,8 +1,8 @@
-import type { NextPage } from 'next'
+import type { GetServerSidePropsContext, NextPage } from 'next'
 import { PostCardList } from '../../components/PostCardList'
-import { host } from '../../config'
+
 import { PostsPageQuery } from '../../generated/graphql'
-import { edgesToList } from '../../utils'
+import { edgesToList, getHost } from '../../utils'
 
 const Posts: NextPage<{ data: PostsPageQuery }> = ({ data }) => {
   return (
@@ -14,8 +14,8 @@ const Posts: NextPage<{ data: PostsPageQuery }> = ({ data }) => {
 
 export default Posts
 
-export async function getServerSideProps() {
-  const res = await fetch(`${host}/api/posts`)
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const res = await fetch(`${getHost(context)}/api/posts`)
   const { data } = await res.json()
   return { props: { data } }
 }
