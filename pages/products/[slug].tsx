@@ -12,6 +12,7 @@ const Product: NextPage<{ data: ProductPageQuery }> = ({ data }) => {
         {data.product?.galleryImages?.nodes?.map((item) => (
           <div key={item?.sourceUrl} className="relative aspect-w-1 aspect-h-1">
             <img
+              loading="lazy"
               src={
                 item?.sourceUrl ||
                 'http://docker:8080/wp-content/uploads/woocommerce-placeholder.png'

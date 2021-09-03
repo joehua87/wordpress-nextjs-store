@@ -9,6 +9,7 @@ export function ProductCard({ entity }: { entity: ProductCardFragment }) {
       <a className="border rounded shadow-sm hover:shadow-lg">
         <div className="relative aspect-w-1 aspect-h-1">
           <img
+            loading="lazy"
             src={
               entity.image?.sourceUrl ||
               'http://docker:8080/wp-content/uploads/woocommerce-placeholder.png'
