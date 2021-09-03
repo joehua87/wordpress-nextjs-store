@@ -6,9 +6,10 @@ export function PostCard({ entity }: { entity: PostCardFragment }) {
   return (
     <Link href={href as string}>
       <a className="border rounded shadow-sm hover:shadow-lg">
-        <div className="relative aspect-w-1 aspect-h-1">
+        <div className="relative aspect-w-4 aspect-h-3">
           <img
             loading="lazy"
+            className="object-cover"
             src={
               entity.featuredImage?.node?.sourceUrl ||
               'http://docker:8080/wp-content/uploads/woocommerce-placeholder.png'

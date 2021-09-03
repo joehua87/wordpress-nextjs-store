@@ -17,8 +17,11 @@ const Home: NextPage<{ data: THomePageQuery }> = ({ data }) => {
           content={data.allSettings?.generalSettingsDescription || ''}
         />
       </Head>
-      {data.posts && <PostCardList entities={edgesToList(data.posts)} />}
-      <div>
+      <div className="mt-4">
+        <h2 className="font-bold text-xl mb-2">Posts</h2>
+        {data.posts && <PostCardList entities={edgesToList(data.posts)} />}
+      </div>
+      <div className="mt-4">
         {data.productCategories?.edges?.map((item) => {
           if (!item?.node?.products) {
             return null
@@ -26,7 +29,7 @@ const Home: NextPage<{ data: THomePageQuery }> = ({ data }) => {
 
           return (
             <div key={item?.node?.id} className="mb-8">
-              <h2 className="font-bold text-lg mb-2">{item?.node?.name}</h2>
+              <h3 className="font-semibold text-lg mb-2">{item?.node?.name}</h3>
               <ProductCardList entities={edgesToList(item.node.products)} />
             </div>
           )
