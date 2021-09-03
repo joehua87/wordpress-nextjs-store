@@ -30,7 +30,7 @@ export const PostCardFragment = gql`
     link
     featuredImage {
       node {
-        sourceUrl
+        sourceUrl(size: MEDIUM)
       }
     }
     __typename
