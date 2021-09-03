@@ -1,13 +1,10 @@
-import { PostCardListFragment } from '../generated/graphql'
+import { PostCardFragment } from '../generated/graphql'
 import { PostCard } from './PostCard'
 
-export function PostCardList({ data }: { data: PostCardListFragment }) {
+export function PostCardList({ entities }: { entities: PostCardFragment[] }) {
   return (
     <div className="grid gap-2 grid-cols-2 lg:gap-4 lg:grid-cols-4 xl:grid-cols-6">
-      {data.edges?.map(
-        (post) =>
-          post?.node && <PostCard key={post.node.id} entity={post.node} />,
-      )}
+      {entities.map((post) => post && <PostCard key={post.id} entity={post} />)}
     </div>
   )
 }

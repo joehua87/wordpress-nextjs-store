@@ -2,9 +2,9 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { host } from '../config'
 import { HomePageQuery } from '../generated/graphql'
-import { PostCard } from '../components/PostCard'
 import { PostCardList } from '../components/PostCardList'
 import { ProductCardList } from '../components/ProductCardList'
+import { edgesToList } from '../utils'
 
 const Home: NextPage<{ data: HomePageQuery }> = ({ data }) => {
   return (
@@ -16,7 +16,7 @@ const Home: NextPage<{ data: HomePageQuery }> = ({ data }) => {
           content={data.allSettings?.generalSettingsDescription || ''}
         />
       </Head>
-      {data.posts && <PostCardList data={data.posts} />}
+      {data.posts && <PostCardList entities={edgesToList(data.posts)} />}
       <div>
         {data.productCategories?.edges?.map((item) => {
           if (!item?.node?.products) {
@@ -26,7 +26,7 @@ const Home: NextPage<{ data: HomePageQuery }> = ({ data }) => {
           return (
             <div key={item?.node?.id} className="mb-8">
               <h2 className="font-bold text-lg mb-2">{item?.node?.name}</h2>
-              <ProductCardList data={item.node.products} />
+              <ProductCardList entities={edgesToList(item.node.products)} />
             </div>
           )
         })}

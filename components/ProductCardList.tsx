@@ -1,15 +1,19 @@
-import { ProductCardListFragment } from '../generated/graphql'
+import {
+  ProductCardFragment,
+  ProductCardListFragment,
+} from '../generated/graphql'
 import { ProductCard } from './ProductCard'
 
-export function ProductCardList({ data }: { data: ProductCardListFragment }) {
+export function ProductCardList({
+  entities,
+}: {
+  entities: ProductCardFragment[]
+}) {
   return (
     <div className="grid gap-2 grid-cols-2 lg:gap-4 lg:grid-cols-4 xl:grid-cols-6">
-      {data.edges?.map(
-        (product) =>
-          product?.node && (
-            <ProductCard key={product.node.id} entity={product.node} />
-          ),
-      )}
+      {entities.map((entity) => (
+        <ProductCard key={entity.id} entity={entity} />
+      ))}
     </div>
   )
 }
