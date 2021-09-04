@@ -10,20 +10,10 @@ import { ProductCardList } from '../components/ProductCardList'
 import { edgesToList, fetchData } from '../utils'
 import { queries } from '../queries/queries'
 import { parseBlocks } from '../utils/block'
-
-export interface GalleryItem {
-  id: string | null
-  src: string | null
-  alt: string | null
-  caption: string | null
-  description: string | null
-  href: string | null
-}
-
-export interface Gallery {
-  id: string
-  items?: GalleryItem[]
-}
+import 'keen-slider/keen-slider.min.css'
+import React from 'react'
+import { Carousel } from '../components/Carousel'
+import { Gallery } from '../types'
 
 const Home: NextPage<{ data: THomePageQuery; blocks: Record<string, any> }> = ({
   data,
@@ -32,7 +22,7 @@ const Home: NextPage<{ data: THomePageQuery; blocks: Record<string, any> }> = ({
   const slider = blocks['ahihi'] as Gallery
 
   return (
-    <div className="container mx-auto">
+    <>
       <Head>
         <title>{data.allSettings?.generalSettingsTitle}</title>
         <meta
@@ -40,28 +30,30 @@ const Home: NextPage<{ data: THomePageQuery; blocks: Record<string, any> }> = ({
           content={data.allSettings?.generalSettingsDescription || ''}
         />
       </Head>
-      {slider?.items?.map((item) => (
-        <img key={item.id} src={item.src || ''} alt={item.alt || undefined} />
-      ))}
-      <div className="mt-4">
-        <h2 className="font-bold text-xl mb-2">Posts</h2>
-        {data.posts && <PostCardList entities={edgesToList(data.posts)} />}
-      </div>
-      <div className="mt-4">
-        {data.productCategories?.edges?.map((item) => {
-          if (!item?.node?.products) {
-            return null
-          }
+      <Carousel gallery={slider} />
+      <div className="container mx-auto">
+        <div className="mt-4">
+          <h2 className="font-bold text-xl mb-2">Posts</h2>
+          {data.posts && <PostCardList entities={edgesToList(data.posts)} />}
+        </div>
+        <div className="mt-4">
+          {data.productCategories?.edges?.map((item) => {
+            if (!item?.node?.products) {
+              return null
+            }
 
-          return (
-            <div key={item?.node?.id} className="mb-8">
-              <h3 className="font-semibold text-lg mb-2">{item?.node?.name}</h3>
-              <ProductCardList entities={edgesToList(item.node.products)} />
-            </div>
-          )
-        })}
+            return (
+              <div key={item?.node?.id} className="mb-8">
+                <h3 className="font-semibold text-lg mb-2">
+                  {item?.node?.name}
+                </h3>
+                <ProductCardList entities={edgesToList(item.node.products)} />
+              </div>
+            )
+          })}
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 
