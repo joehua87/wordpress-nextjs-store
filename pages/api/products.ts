@@ -19,11 +19,11 @@ export default async function handler(
           taxonomyFilter: {
             relation: 'AND',
             filters: [
-              {
-                taxonomy: TaxonomyEnum.Pacolor,
-                operator: TaxonomyOperatorEnum.In,
-                terms: ['blue'],
-              },
+              // {
+              //   taxonomy: TaxonomyEnum.Pacolor,
+              //   operator: TaxonomyOperatorEnum.In,
+              //   terms: ['blue'],
+              // },
             ],
           },
         },

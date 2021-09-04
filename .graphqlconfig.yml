@@ -1,5 +1,5 @@
-schema: ./schema/schema.graphql
-# schema: http://docker:8080/index.php?graphql
+# schema: ./schema/schema.graphql
+schema: https://admin.wordpress-demo.dew.vn/index.php?graphql
 extensions:
   codegen:
     generates:
