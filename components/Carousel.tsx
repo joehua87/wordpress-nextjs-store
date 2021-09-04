@@ -49,7 +49,7 @@ export function Carousel({ gallery }: { gallery: Gallery }) {
       )}
       {slider && (
         <div className="absolute bottom-0 z-10 left-1/2 transform -translate-x-1/2 grid gap-2 grid-flow-col p-2">
-          {[...Array(gallery.items?.length)].map((_, idx) => {
+          {[...Array(gallery?.items?.length || 0)].map((_, idx) => {
             return (
               <button
                 key={idx}
