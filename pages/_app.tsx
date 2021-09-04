@@ -1,7 +1,7 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import Link from 'next/link'
 import Router from 'next/router'
+import { DesktopHeader } from '../components/DesktopHeader'
 
 if (typeof window !== 'undefined') {
   import('topbar').then(({ default: topbar }) => {
@@ -33,19 +33,7 @@ if (typeof window !== 'undefined') {
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <div>
-      <header className="bg-rose-100 h-12 flex items-center">
-        <nav className="container mx-auto">
-          <Link href="/">
-            <a>Home</a>
-          </Link>
-          <Link href="/products">
-            <a className="ml-2">Products</a>
-          </Link>
-          <Link href="/posts">
-            <a className="ml-2">Posts</a>
-          </Link>
-        </nav>
-      </header>
+      <DesktopHeader />
       <main className="">
         <Component {...pageProps} />
       </main>
