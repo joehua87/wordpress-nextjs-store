@@ -1,7 +1,16 @@
-import type { GetServerSidePropsContext, NextPage } from 'next'
-import { ProductPageQuery } from '../../generated/graphql'
+import type {
+  GetStaticPropsContext,
+  GetStaticPaths,
+  NextPage,
+  GetStaticProps,
+} from 'next'
+import {
+  ProductPageQuery,
+  ProductPageQueryVariables,
+} from '../../generated/graphql'
 import { EntitySeo } from '../../components/EntitySeo'
-import { getHost } from '../../utils'
+import { fetchData } from '../../utils'
+import { queries } from '../../queries/queries'
 
 const Product: NextPage<{ data: ProductPageQuery }> = ({ data }) => {
   return (
@@ -28,10 +37,17 @@ const Product: NextPage<{ data: ProductPageQuery }> = ({ data }) => {
 
 export default Product
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const res = await fetch(
-    `${getHost(context)}/api/product?slug=${context.query.slug}`,
-  )
-  const { data } = await res.json()
-  return { props: { data } }
+export const getStaticProps: GetStaticProps = async (context) => {
+  const { data, error } = await fetchData<
+    ProductPageQuery,
+    ProductPageQueryVariables
+  >(queries.ProductPageQuery, { slug: context.params?.slug as string })
+  return { props: data ? { data } : { error }, revalidate: 10 }
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return {
+    paths: [],
+    fallback: 'blocking',
+  }
 }

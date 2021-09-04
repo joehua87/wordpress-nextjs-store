@@ -1,11 +1,14 @@
-import type { NextPage } from 'next'
+import type { GetStaticProps, NextPage } from 'next'
 import Head from 'next/head'
-import type { HomePageQuery as THomePageQuery } from '../generated/graphql'
+import type {
+  HomePageQuery as THomePageQuery,
+  HomePageQuery,
+  HomePageQueryVariables,
+} from '../generated/graphql'
 import { PostCardList } from '../components/PostCardList'
 import { ProductCardList } from '../components/ProductCardList'
-import { edgesToList, getHost } from '../utils'
-import { graphqlEndpoint } from '../config'
-import { HomePageQuery } from '../queries/pages/HomePage'
+import { edgesToList, fetchData } from '../utils'
+import { queries } from '../queries/queries'
 
 const Home: NextPage<{ data: THomePageQuery }> = ({ data }) => {
   return (
@@ -41,21 +44,10 @@ const Home: NextPage<{ data: THomePageQuery }> = ({ data }) => {
 
 export default Home
 
-/*
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const res = await fetch(`${getHost(context)}/api`)
-  const { data } = await res.json()
-  return { props: { data } }
-}
-*/
-export async function getStaticProps() {
-  const response = await fetch(graphqlEndpoint, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    method: 'post',
-    body: JSON.stringify({ query: HomePageQuery.loc?.source.body }),
-  })
-  const { data } = await response.json()
-  return { props: { data } }
+export const getStaticProps: GetStaticProps = async () => {
+  const { data, error } = await fetchData<
+    HomePageQuery,
+    HomePageQueryVariables
+  >(queries.HomePageQuery, {})
+  return { props: data ? { data } : { error }, revalidate: 10 }
 }

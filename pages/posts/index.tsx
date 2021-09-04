@@ -1,9 +1,13 @@
 import Head from 'next/head'
-import type { GetServerSidePropsContext, NextPage } from 'next'
+import type { GetStaticProps, NextPage } from 'next'
 import { PostCardList } from '../../components/PostCardList'
 
-import { PostsPageQuery } from '../../generated/graphql'
-import { edgesToList, getHost } from '../../utils'
+import {
+  PostsPageQuery,
+  PostsPageQueryVariables,
+} from '../../generated/graphql'
+import { edgesToList, fetchData } from '../../utils'
+import { queries } from '../../queries/queries'
 
 const Posts: NextPage<{ data: PostsPageQuery }> = ({ data }) => {
   return (
@@ -19,8 +23,10 @@ const Posts: NextPage<{ data: PostsPageQuery }> = ({ data }) => {
 
 export default Posts
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const res = await fetch(`${getHost(context)}/api/posts`)
-  const { data } = await res.json()
-  return { props: { data } }
+export const getStaticProps: GetStaticProps = async () => {
+  const { data, error } = await fetchData<
+    PostsPageQuery,
+    PostsPageQueryVariables
+  >(queries.PostsPageQuery, {})
+  return { props: data ? { data } : { error }, revalidate: 10 }
 }
