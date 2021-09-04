@@ -11,7 +11,7 @@ export function PostCard({ entity }: { entity: PostCardFragment }) {
             loading="lazy"
             className="object-cover"
             src={
-              entity.featuredImage?.node?.sourceUrl ||
+              entity.featuredImage?.node?.mediumUrl ||
               'http://docker:8080/wp-content/uploads/woocommerce-placeholder.png'
             }
             alt={entity.title || undefined}

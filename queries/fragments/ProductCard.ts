@@ -1,4 +1,5 @@
 import { gql } from '@urql/core'
+import { MediaItemFragment } from './MediaItem'
 
 export const ProductCardFragment = gql`
   fragment ProductCard on Product {
@@ -8,7 +9,7 @@ export const ProductCardFragment = gql`
     name
     featured
     image {
-      sourceUrl(size: MEDIUM)
+      ...MediaItem
     }
     attributes {
       nodes {
@@ -34,6 +35,7 @@ export const ProductCardFragment = gql`
     }
     __typename
   }
+  ${MediaItemFragment}
 `
 
 export const ProductCardListFragment = gql`

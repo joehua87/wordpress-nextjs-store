@@ -1,5 +1,6 @@
 import { gql } from '@urql/core'
 import { EntitySeoFragment } from '../fragments/EntitySeo'
+import { MediaItemFragment } from '../fragments/MediaItem'
 
 export const ProductPageQuery = gql`
   query ProductPage($slug: ID!) {
@@ -8,11 +9,11 @@ export const ProductPageQuery = gql`
       slug
       name
       image {
-        sourceUrl
+        ...MediaItem
       }
       galleryImages {
         nodes {
-          sourceUrl(size: LARGE)
+          ...MediaItem
         }
       }
       attributes {
@@ -53,5 +54,6 @@ export const ProductPageQuery = gql`
     }
     __typename
   }
+  ${MediaItemFragment}
   ${EntitySeoFragment}
 `

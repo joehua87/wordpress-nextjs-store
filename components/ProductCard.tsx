@@ -11,7 +11,7 @@ export function ProductCard({ entity }: { entity: ProductCardFragment }) {
           <img
             loading="lazy"
             src={
-              entity.image?.sourceUrl ||
+              entity.image?.mediumUrl ||
               'http://docker:8080/wp-content/uploads/woocommerce-placeholder.png'
             }
             alt={entity.name || undefined}

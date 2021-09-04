@@ -1,4 +1,5 @@
 import { gql } from '@urql/core'
+import { MediaItemFragment } from './MediaItem'
 
 export const PostCardFragment = gql`
   fragment PostCard on Post {
@@ -30,11 +31,12 @@ export const PostCardFragment = gql`
     link
     featuredImage {
       node {
-        sourceUrl(size: MEDIUM)
+        ...MediaItem
       }
     }
     __typename
   }
+  ${MediaItemFragment}
 `
 
 export const PostCardListFragment = gql`

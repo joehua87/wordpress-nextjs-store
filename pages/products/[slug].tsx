@@ -1,35 +1,29 @@
-import type {
-  GetStaticPropsContext,
-  GetStaticPaths,
-  NextPage,
-  GetStaticProps,
-} from 'next'
+import type { GetStaticPaths, NextPage, GetStaticProps } from 'next'
 import {
   ProductPageQuery,
   ProductPageQueryVariables,
 } from '../../generated/graphql'
 import { EntitySeo } from '../../components/EntitySeo'
-import { fetchData } from '../../utils'
+import { fetchData, notEmpty } from '../../utils'
 import { queries } from '../../queries/queries'
+import ProductSlider from '../../components/ProductSlider'
 
 const Product: NextPage<{ data: ProductPageQuery }> = ({ data }) => {
+  const images = data.product?.galleryImages?.nodes
+    ?.map((x) => x?.sourceUrl)
+    .filter(notEmpty)
   return (
     <div className="container mx-auto">
       <EntitySeo entity={data.product?.seo} />
-      <h1 className="text-2xl font-serif">{data.product?.name}</h1>
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2 lg:gap-4">
-        {data.product?.galleryImages?.nodes?.map((item) => (
-          <div key={item?.sourceUrl} className="relative aspect-w-1 aspect-h-1">
-            <img
-              loading="lazy"
-              src={
-                item?.sourceUrl ||
-                'http://docker:8080/wp-content/uploads/woocommerce-placeholder.png'
-              }
-              alt={data.product?.name || undefined}
-            />
-          </div>
-        ))}
+      <div className="flex mt-4">
+        <div className="w-full lg:w-3/5">
+          <ProductSlider
+            images={data.product?.galleryImages?.nodes?.filter(notEmpty) || []}
+          />
+        </div>
+        <div className="w-full lg:w-2/5 lg:pl-4">
+          <h1 className="text-2xl font-serif">{data.product?.name}</h1>
+        </div>
       </div>
     </div>
   )
