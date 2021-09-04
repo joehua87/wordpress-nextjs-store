@@ -1110,6 +1110,129 @@ export enum CommentsConnectionOrderbyEnum {
   UserId = 'USER_ID'
 }
 
+/** The Config type */
+export type Config = Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTemplate & NodeWithTitle & NodeWithContentEditor & NodeWithFeaturedImage & MenuItemLinkable & {
+  __typename?: 'Config';
+  /**
+   * The id field matches the WP_Post-&gt;ID field.
+   * @deprecated Deprecated in favor of the databaseId field
+   */
+  configId: Scalars['Int'];
+  /** The content of the post. */
+  content?: Maybe<Scalars['String']>;
+  /** Connection between the ContentNode type and the ContentType type */
+  contentType?: Maybe<ContentNodeToContentTypeConnectionEdge>;
+  /** The unique resource identifier path */
+  databaseId: Scalars['Int'];
+  /** Post publishing date. */
+  date?: Maybe<Scalars['String']>;
+  /** The publishing date set in GMT. */
+  dateGmt?: Maybe<Scalars['String']>;
+  /** The desired slug of the post */
+  desiredSlug?: Maybe<Scalars['String']>;
+  /** If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds */
+  editingLockedBy?: Maybe<ContentNodeToEditLockConnectionEdge>;
+  /** The RSS enclosure for the object */
+  enclosure?: Maybe<Scalars['String']>;
+  /** Connection between the ContentNode type and the EnqueuedScript type */
+  enqueuedScripts?: Maybe<ContentNodeToEnqueuedScriptConnection>;
+  /** Connection between the ContentNode type and the EnqueuedStylesheet type */
+  enqueuedStylesheets?: Maybe<ContentNodeToEnqueuedStylesheetConnection>;
+  /** Connection between the NodeWithFeaturedImage type and the MediaItem type */
+  featuredImage?: Maybe<NodeWithFeaturedImageToMediaItemConnectionEdge>;
+  /** The database identifier for the featured image node assigned to the content node */
+  featuredImageDatabaseId?: Maybe<Scalars['Int']>;
+  /** Globally unique ID of the featured image assigned to the node */
+  featuredImageId?: Maybe<Scalars['ID']>;
+  /** The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table. */
+  guid?: Maybe<Scalars['String']>;
+  /** The globally unique identifier of the config object. */
+  id: Scalars['ID'];
+  /** Whether the node is a Content Node */
+  isContentNode: Scalars['Boolean'];
+  /** Whether the object is a node in the preview state */
+  isPreview?: Maybe<Scalars['Boolean']>;
+  /** Whether the object is restricted from the current viewer */
+  isRestricted?: Maybe<Scalars['Boolean']>;
+  /** Whether the node is a Term */
+  isTermNode: Scalars['Boolean'];
+  /** The user that most recently edited the node */
+  lastEditedBy?: Maybe<ContentNodeToEditLastConnectionEdge>;
+  /** The permalink of the post */
+  link?: Maybe<Scalars['String']>;
+  /** The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time. */
+  modified?: Maybe<Scalars['String']>;
+  /** The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT. */
+  modifiedGmt?: Maybe<Scalars['String']>;
+  /** Connection between the Config type and the Config type */
+  preview?: Maybe<ConfigToPreviewConnectionEdge>;
+  /** The database id of the preview node */
+  previewRevisionDatabaseId?: Maybe<Scalars['Int']>;
+  /** Whether the object is a node in the preview state */
+  previewRevisionId?: Maybe<Scalars['ID']>;
+  /** The Yoast SEO data of the Config */
+  seo?: Maybe<PostTypeSeo>;
+  /** The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table. */
+  slug?: Maybe<Scalars['String']>;
+  /** The current status of the object */
+  status?: Maybe<Scalars['String']>;
+  /** The template assigned to a node of content */
+  template?: Maybe<ContentTemplate>;
+  /** The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made. */
+  title?: Maybe<Scalars['String']>;
+  /** The unique resource identifier path */
+  uri?: Maybe<Scalars['String']>;
+};
+
+
+/** The Config type */
+export type ConfigContentArgs = {
+  format?: Maybe<PostObjectFieldFormatEnum>;
+};
+
+
+/** The Config type */
+export type ConfigEnqueuedScriptsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+};
+
+
+/** The Config type */
+export type ConfigEnqueuedStylesheetsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+};
+
+
+/** The Config type */
+export type ConfigTitleArgs = {
+  format?: Maybe<PostObjectFieldFormatEnum>;
+};
+
+/** The Type of Identifier used to fetch a single resource. Default is ID. */
+export enum ConfigIdType {
+  /** Identify a resource by the Database ID. */
+  DatabaseId = 'DATABASE_ID',
+  /** Identify a resource by the (hashed) Global ID. */
+  Id = 'ID',
+  /** Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier. */
+  Slug = 'SLUG',
+  /** Identify a resource by the URI. */
+  Uri = 'URI'
+}
+
+/** Connection between the Config type and the Config type */
+export type ConfigToPreviewConnectionEdge = {
+  __typename?: 'ConfigToPreviewConnectionEdge';
+  /** The node of the connection, without the edges */
+  node?: Maybe<Config>;
+};
+
 /** Nodes used to manage content */
 export type ContentNode = {
   /** Connection between the ContentNode type and the ContentType type */
@@ -1356,6 +1479,8 @@ export type ContentTypeContentNodesArgs = {
 export enum ContentTypeEnum {
   /** The Type of Content object */
   Attachment = 'ATTACHMENT',
+  /** The Type of Content object */
+  Config = 'CONFIG',
   /** The Type of Content object */
   Page = 'PAGE',
   /** The Type of Content object */
@@ -2363,6 +2488,35 @@ export type CreateCommentPayload = {
   success?: Maybe<Scalars['Boolean']>;
 };
 
+/** Input for the createConfig mutation */
+export type CreateConfigInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The content of the object */
+  content?: Maybe<Scalars['String']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: Maybe<Scalars['String']>;
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: Maybe<Scalars['Int']>;
+  /** The password used to protect the content of the object */
+  password?: Maybe<Scalars['String']>;
+  /** The slug of the object */
+  slug?: Maybe<Scalars['String']>;
+  /** The status of the object */
+  status?: Maybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: Maybe<Scalars['String']>;
+};
+
+/** The payload for the createConfig mutation */
+export type CreateConfigPayload = {
+  __typename?: 'CreateConfigPayload';
+  /** The Post object mutation type. */
+  config?: Maybe<Config>;
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 /** Input for the createCoupon mutation */
 export type CreateCouponInput = {
   /** The amount of discount. Should always be numeric, even if setting a percentage. */
@@ -3274,6 +3428,27 @@ export type DeleteCommentPayload = {
   /** The deleted comment object */
   comment?: Maybe<Comment>;
   /** The deleted comment ID */
+  deletedId?: Maybe<Scalars['ID']>;
+};
+
+/** Input for the deleteConfig mutation */
+export type DeleteConfigInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** Whether the object should be force deleted instead of being moved to the trash */
+  forceDelete?: Maybe<Scalars['Boolean']>;
+  /** The ID of the Config to delete */
+  id: Scalars['ID'];
+};
+
+/** The payload for the deleteConfig mutation */
+export type DeleteConfigPayload = {
+  __typename?: 'DeleteConfigPayload';
+  /** The object before it was deleted */
+  config?: Maybe<Config>;
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The ID of the deleted object */
   deletedId?: Maybe<Scalars['ID']>;
 };
 
@@ -5773,7 +5948,7 @@ export enum MenuItemNodeIdTypeEnum {
 }
 
 /** Deprecated in favor of MenuItemLinkeable Interface */
-export type MenuItemObjectUnion = Post | Page | RealProject | Category | Tag | ProductCategory | ProductTag | Gender;
+export type MenuItemObjectUnion = Post | Page | RealProject | Config | Category | Tag | ProductCategory | ProductTag | Gender;
 
 /** Connection between the MenuItem type and the Menu type */
 export type MenuItemToMenuConnectionEdge = {
@@ -12147,6 +12322,8 @@ export type RootMutation = {
   createCategory?: Maybe<CreateCategoryPayload>;
   /** The payload for the createComment mutation */
   createComment?: Maybe<CreateCommentPayload>;
+  /** The payload for the createConfig mutation */
+  createConfig?: Maybe<CreateConfigPayload>;
   /** The payload for the createCoupon mutation */
   createCoupon?: Maybe<CreateCouponPayload>;
   /** The payload for the createGender mutation */
@@ -12185,6 +12362,8 @@ export type RootMutation = {
   deleteCategory?: Maybe<DeleteCategoryPayload>;
   /** The payload for the deleteComment mutation */
   deleteComment?: Maybe<DeleteCommentPayload>;
+  /** The payload for the deleteConfig mutation */
+  deleteConfig?: Maybe<DeleteConfigPayload>;
   /** The payload for the deleteCoupon mutation */
   deleteCoupon?: Maybe<DeleteCouponPayload>;
   /** The payload for the deleteGender mutation */
@@ -12251,6 +12430,8 @@ export type RootMutation = {
   updateCategory?: Maybe<UpdateCategoryPayload>;
   /** The payload for the updateComment mutation */
   updateComment?: Maybe<UpdateCommentPayload>;
+  /** The payload for the updateConfig mutation */
+  updateConfig?: Maybe<UpdateConfigPayload>;
   /** The payload for the updateCoupon mutation */
   updateCoupon?: Maybe<UpdateCouponPayload>;
   /** The payload for the updateCustomer mutation */
@@ -12339,6 +12520,12 @@ export type RootMutationCreateCategoryArgs = {
 /** The root mutation */
 export type RootMutationCreateCommentArgs = {
   input: CreateCommentInput;
+};
+
+
+/** The root mutation */
+export type RootMutationCreateConfigArgs = {
+  input: CreateConfigInput;
 };
 
 
@@ -12453,6 +12640,12 @@ export type RootMutationDeleteCategoryArgs = {
 /** The root mutation */
 export type RootMutationDeleteCommentArgs = {
   input: DeleteCommentInput;
+};
+
+
+/** The root mutation */
+export type RootMutationDeleteConfigArgs = {
+  input: DeleteConfigInput;
 };
 
 
@@ -12655,6 +12848,12 @@ export type RootMutationUpdateCommentArgs = {
 
 
 /** The root mutation */
+export type RootMutationUpdateConfigArgs = {
+  input: UpdateConfigInput;
+};
+
+
+/** The root mutation */
 export type RootMutationUpdateCouponArgs = {
   input: UpdateCouponInput;
 };
@@ -12810,6 +13009,15 @@ export type RootQuery = {
   comment?: Maybe<Comment>;
   /** Connection between the RootQuery type and the Comment type */
   comments?: Maybe<RootQueryToCommentConnection>;
+  /** An object of the Config Type.  */
+  config?: Maybe<Config>;
+  /**
+   * A Config object
+   * @deprecated Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)
+   */
+  configBy?: Maybe<Config>;
+  /** Connection between the RootQuery type and the Config type */
+  configs?: Maybe<RootQueryToConfigConnection>;
   /** A node used to manage content */
   contentNode?: Maybe<ContentNode>;
   /** Connection between the RootQuery type and the ContentNode type */
@@ -13039,6 +13247,33 @@ export type RootQueryCommentsArgs = {
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
   where?: Maybe<RootQueryToCommentConnectionWhereArgs>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryConfigArgs = {
+  id: Scalars['ID'];
+  idType?: Maybe<ConfigIdType>;
+  asPreview?: Maybe<Scalars['Boolean']>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryConfigByArgs = {
+  id?: Maybe<Scalars['ID']>;
+  configId?: Maybe<Scalars['Int']>;
+  uri?: Maybe<Scalars['String']>;
+  slug?: Maybe<Scalars['String']>;
+};
+
+
+/** The root entry point into the Graph */
+export type RootQueryConfigsArgs = {
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  where?: Maybe<RootQueryToConfigConnectionWhereArgs>;
 };
 
 
@@ -13830,6 +14065,64 @@ export type RootQueryToCommentConnectionWhereArgs = {
   status?: Maybe<Scalars['String']>;
   /** Include comments for a specific user ID. */
   userId?: Maybe<Scalars['ID']>;
+};
+
+/** Connection between the RootQuery type and the Config type */
+export type RootQueryToConfigConnection = {
+  __typename?: 'RootQueryToConfigConnection';
+  /** Edges for the RootQueryToConfigConnection connection */
+  edges?: Maybe<Array<Maybe<RootQueryToConfigConnectionEdge>>>;
+  /** The nodes of the connection, without the edges */
+  nodes?: Maybe<Array<Maybe<Config>>>;
+  /** Information about pagination in a connection. */
+  pageInfo?: Maybe<WpPageInfo>;
+};
+
+/** An edge in a connection */
+export type RootQueryToConfigConnectionEdge = {
+  __typename?: 'RootQueryToConfigConnectionEdge';
+  /** A cursor for use in pagination */
+  cursor?: Maybe<Scalars['String']>;
+  /** The item at the end of the edge */
+  node?: Maybe<Config>;
+};
+
+/** Arguments for filtering the RootQueryToConfigConnection connection */
+export type RootQueryToConfigConnectionWhereArgs = {
+  /** Filter the connection based on dates */
+  dateQuery?: Maybe<DateQueryInput>;
+  /** True for objects with passwords; False for objects without passwords; null for all objects with or without passwords */
+  hasPassword?: Maybe<Scalars['Boolean']>;
+  /** Specific ID of the object */
+  id?: Maybe<Scalars['Int']>;
+  /** Array of IDs for the objects to retrieve */
+  in?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Get objects with a specific mimeType property */
+  mimeType?: Maybe<MimeTypeEnum>;
+  /** Slug / post_name of the object */
+  name?: Maybe<Scalars['String']>;
+  /** Specify objects to retrieve. Use slugs */
+  nameIn?: Maybe<Array<Maybe<Scalars['String']>>>;
+  /** Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored */
+  notIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** What paramater to use to order the objects by. */
+  orderby?: Maybe<Array<Maybe<PostObjectsConnectionOrderbyInput>>>;
+  /** Use ID to return only children. Use 0 to return only top-level items */
+  parent?: Maybe<Scalars['ID']>;
+  /** Specify objects whose parent is in an array */
+  parentIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Specify posts whose parent is not in an array */
+  parentNotIn?: Maybe<Array<Maybe<Scalars['ID']>>>;
+  /** Show posts with a specific password. */
+  password?: Maybe<Scalars['String']>;
+  /** Show Posts based on a keyword search */
+  search?: Maybe<Scalars['String']>;
+  /** Retrieve posts where post status is in an array. */
+  stati?: Maybe<Array<Maybe<PostStatusEnum>>>;
+  /** Show posts with a specific status. */
+  status?: Maybe<PostStatusEnum>;
+  /** Title of the object */
+  title?: Maybe<Scalars['String']>;
 };
 
 /** Connection between the RootQuery type and the ContentNode type */
@@ -15594,6 +15887,7 @@ export type SeoContentTypeArchive = {
 /** The Yoast SEO search appearance content types */
 export type SeoContentTypes = {
   __typename?: 'SEOContentTypes';
+  config?: Maybe<SeoContentType>;
   mediaItem?: Maybe<SeoContentType>;
   page?: Maybe<SeoContentType>;
   post?: Maybe<SeoContentType>;
@@ -17358,6 +17652,37 @@ export type UpdateCommentPayload = {
   comment?: Maybe<Comment>;
   /** Whether the mutation succeeded. If the comment is not approved, the server will not return the comment to a non authenticated user, but a success message can be returned if the create succeeded, and the client can optimistically add the comment to the client cache */
   success?: Maybe<Scalars['Boolean']>;
+};
+
+/** Input for the updateConfig mutation */
+export type UpdateConfigInput = {
+  /** This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  /** The content of the object */
+  content?: Maybe<Scalars['String']>;
+  /** The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17  */
+  date?: Maybe<Scalars['String']>;
+  /** The ID of the Config object */
+  id: Scalars['ID'];
+  /** A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types. */
+  menuOrder?: Maybe<Scalars['Int']>;
+  /** The password used to protect the content of the object */
+  password?: Maybe<Scalars['String']>;
+  /** The slug of the object */
+  slug?: Maybe<Scalars['String']>;
+  /** The status of the object */
+  status?: Maybe<PostStatusEnum>;
+  /** The title of the object */
+  title?: Maybe<Scalars['String']>;
+};
+
+/** The payload for the updateConfig mutation */
+export type UpdateConfigPayload = {
+  __typename?: 'UpdateConfigPayload';
+  /** The Post object mutation type. */
+  config?: Maybe<Config>;
+  /** If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions. */
+  clientMutationId?: Maybe<Scalars['String']>;
 };
 
 /** Input for the updateCoupon mutation */
@@ -19688,7 +20013,7 @@ export type ProductCardListFragment = { __typename?: 'ProductCategoryToProductCo
 export type HomePageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type HomePageQuery = { __typename?: 'RootQuery', genders?: Maybe<{ __typename?: 'RootQueryToGenderConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Gender', id: string, name?: Maybe<string>, slug?: Maybe<string> }>>> }>, categories?: Maybe<{ __typename?: 'RootQueryToCategoryConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'Category', id: string, name?: Maybe<string>, slug?: Maybe<string> }>>> }>, paSizes?: Maybe<{ __typename?: 'RootQueryToPaSizeConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'PaSize', id: string, name?: Maybe<string>, slug?: Maybe<string> }>>> }>, paColors?: Maybe<{ __typename?: 'RootQueryToPaColorConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'PaColor', id: string, name?: Maybe<string>, slug?: Maybe<string> }>>> }>, terms?: Maybe<{ __typename?: 'RootQueryToTermNodeConnection', pageInfo?: Maybe<{ __typename?: 'WPPageInfo', total?: Maybe<number> }>, nodes?: Maybe<Array<Maybe<{ __typename: 'Category', id: string, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, name?: Maybe<string>, slug?: Maybe<string> } | { __typename: 'Gender', id: string, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, name?: Maybe<string>, slug?: Maybe<string> } | { __typename: 'PaColor', id: string, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, name?: Maybe<string>, slug?: Maybe<string> } | { __typename: 'PaSize', id: string, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, name?: Maybe<string>, slug?: Maybe<string> } | { __typename: 'PostFormat', id: string, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, name?: Maybe<string>, slug?: Maybe<string> } | { __typename: 'ProductCategory', id: string, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, name?: Maybe<string>, slug?: Maybe<string> } | { __typename: 'ProductTag', id: string, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, name?: Maybe<string>, slug?: Maybe<string> } | { __typename: 'ProductType', id: string, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, name?: Maybe<string>, slug?: Maybe<string> } | { __typename: 'ShippingClass', id: string, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, name?: Maybe<string>, slug?: Maybe<string> } | { __typename: 'Tag', id: string, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, name?: Maybe<string>, slug?: Maybe<string> } | { __typename: 'VisibleProduct', id: string, termGroupId?: Maybe<number>, termTaxonomyId?: Maybe<number>, name?: Maybe<string>, slug?: Maybe<string> }>>> }>, allSettings?: Maybe<{ __typename?: 'Settings', generalSettingsTitle?: Maybe<string>, generalSettingsDescription?: Maybe<string> }>, posts?: Maybe<(
+export type HomePageQuery = { __typename?: 'RootQuery', config?: Maybe<{ __typename?: 'Config', content?: Maybe<string> }>, allSettings?: Maybe<{ __typename?: 'Settings', generalSettingsTitle?: Maybe<string>, generalSettingsDescription?: Maybe<string> }>, posts?: Maybe<(
     { __typename?: 'RootQueryToPostConnection' }
     & PostCardListFragment
   )>, productCategories?: Maybe<{ __typename?: 'RootQueryToProductCategoryConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'RootQueryToProductCategoryConnectionEdge', node?: Maybe<{ __typename?: 'ProductCategory', id: string, name?: Maybe<string>, products?: Maybe<(

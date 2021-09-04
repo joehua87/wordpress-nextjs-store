@@ -4,46 +4,8 @@ import { ProductCardListFragment } from '../fragments/ProductCard'
 
 export const HomePageQuery = gql`
   query HomePage {
-    genders {
-      nodes {
-        id
-        name
-        slug
-      }
-    }
-    categories(first: 100) {
-      nodes {
-        id
-        name
-        slug
-      }
-    }
-    paSizes(first: 100) {
-      nodes {
-        id
-        name
-        slug
-      }
-    }
-    paColors(first: 100) {
-      nodes {
-        id
-        name
-        slug
-      }
-    }
-    terms(first: 500) {
-      pageInfo {
-        total
-      }
-      nodes {
-        __typename
-        id
-        termGroupId
-        termTaxonomyId
-        name
-        slug
-      }
+    config(id: "galleries", idType: SLUG) {
+      content(format: RAW)
     }
     allSettings {
       generalSettingsTitle
@@ -52,7 +14,7 @@ export const HomePageQuery = gql`
     posts(first: 6) {
       ...PostCardList
     }
-    productCategories(first: 100) {
+    productCategories(first: 2) {
       edges {
         node {
           id

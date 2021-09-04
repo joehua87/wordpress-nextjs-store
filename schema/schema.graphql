@@ -1389,6 +1389,159 @@ enum CommentsConnectionOrderbyEnum {
   USER_ID
 }
 
+# The Config type
+type Config implements Node & ContentNode & UniformResourceIdentifiable & DatabaseIdentifier & NodeWithTemplate & NodeWithTitle & NodeWithContentEditor & NodeWithFeaturedImage & MenuItemLinkable {
+  # The id field matches the WP_Post-&gt;ID field.
+  configId: Int! @deprecated(reason: "Deprecated in favor of the databaseId field")
+
+  # The content of the post.
+  content(
+    # Format of the field output
+    format: PostObjectFieldFormatEnum
+  ): String
+
+  # Connection between the ContentNode type and the ContentType type
+  contentType: ContentNodeToContentTypeConnectionEdge
+
+  # The unique resource identifier path
+  databaseId: Int!
+
+  # Post publishing date.
+  date: String
+
+  # The publishing date set in GMT.
+  dateGmt: String
+
+  # The desired slug of the post
+  desiredSlug: String
+
+  # If a user has edited the node within the past 15 seconds, this will return the user that last edited. Null if the edit lock doesn&#039;t exist or is greater than 15 seconds
+  editingLockedBy: ContentNodeToEditLockConnectionEdge
+
+  # The RSS enclosure for the object
+  enclosure: String
+
+  # Connection between the ContentNode type and the EnqueuedScript type
+  enqueuedScripts(
+    # The number of items to return after the referenced "after" cursor
+    first: Int
+
+    # The number of items to return before the referenced "before" cursor
+    last: Int
+
+    # Cursor used along with the "first" argument to reference where in the dataset to get data
+    after: String
+
+    # Cursor used along with the "last" argument to reference where in the dataset to get data
+    before: String
+  ): ContentNodeToEnqueuedScriptConnection
+
+  # Connection between the ContentNode type and the EnqueuedStylesheet type
+  enqueuedStylesheets(
+    # The number of items to return after the referenced "after" cursor
+    first: Int
+
+    # The number of items to return before the referenced "before" cursor
+    last: Int
+
+    # Cursor used along with the "first" argument to reference where in the dataset to get data
+    after: String
+
+    # Cursor used along with the "last" argument to reference where in the dataset to get data
+    before: String
+  ): ContentNodeToEnqueuedStylesheetConnection
+
+  # Connection between the NodeWithFeaturedImage type and the MediaItem type
+  featuredImage: NodeWithFeaturedImageToMediaItemConnectionEdge
+
+  # The database identifier for the featured image node assigned to the content node
+  featuredImageDatabaseId: Int
+
+  # Globally unique ID of the featured image assigned to the node
+  featuredImageId: ID
+
+  # The global unique identifier for this post. This currently matches the value stored in WP_Post-&gt;guid and the guid column in the &quot;post_objects&quot; database table.
+  guid: String
+
+  # The globally unique identifier of the config object.
+  id: ID!
+
+  # Whether the node is a Content Node
+  isContentNode: Boolean!
+
+  # Whether the object is a node in the preview state
+  isPreview: Boolean
+
+  # Whether the object is restricted from the current viewer
+  isRestricted: Boolean
+
+  # Whether the node is a Term
+  isTermNode: Boolean!
+
+  # The user that most recently edited the node
+  lastEditedBy: ContentNodeToEditLastConnectionEdge
+
+  # The permalink of the post
+  link: String
+
+  # The local modified time for a post. If a post was recently updated the modified field will change to match the corresponding time.
+  modified: String
+
+  # The GMT modified time for a post. If a post was recently updated the modified field will change to match the corresponding time in GMT.
+  modifiedGmt: String
+
+  # Connection between the Config type and the Config type
+  preview: ConfigToPreviewConnectionEdge
+
+  # The database id of the preview node
+  previewRevisionDatabaseId: Int
+
+  # Whether the object is a node in the preview state
+  previewRevisionId: ID
+
+  # The Yoast SEO data of the Config
+  seo: PostTypeSEO
+
+  # The uri slug for the post. This is equivalent to the WP_Post-&gt;post_name field and the post_name column in the database for the &quot;post_objects&quot; table.
+  slug: String
+
+  # The current status of the object
+  status: String
+
+  # The template assigned to a node of content
+  template: ContentTemplate
+
+  # The title of the post. This is currently just the raw title. An amendment to support rendered title needs to be made.
+  title(
+    # Format of the field output
+    format: PostObjectFieldFormatEnum
+  ): String
+
+  # The unique resource identifier path
+  uri: String
+}
+
+# The Type of Identifier used to fetch a single resource. Default is ID.
+enum ConfigIdType {
+  # Identify a resource by the Database ID.
+  DATABASE_ID
+
+  # Identify a resource by the (hashed) Global ID.
+  ID
+
+  # Identify a resource by the slug. Available to non-hierarchcial Types where the slug is a unique identifier.
+  SLUG
+
+  # Identify a resource by the URI.
+  URI
+}
+
+# Connection between the Config type and the Config type
+type ConfigToPreviewConnectionEdge {
+  # The node of the connection, without the edges
+  node: Config
+}
+
 # Nodes used to manage content
 interface ContentNode implements Node & UniformResourceIdentifiable {
   # Connection between the ContentNode type and the ContentType type
@@ -1705,6 +1858,9 @@ type ContentType implements Node & UniformResourceIdentifiable {
 enum ContentTypeEnum {
   # The Type of Content object
   ATTACHMENT
+
+  # The Type of Content object
+  CONFIG
 
   # The Type of Content object
   PAGE
@@ -2935,6 +3091,42 @@ type CreateCommentPayload {
   success: Boolean
 }
 
+# Input for the createConfig mutation
+input CreateConfigInput {
+  # This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  clientMutationId: String
+
+  # The content of the object
+  content: String
+
+  # The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
+  date: String
+
+  # A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types.
+  menuOrder: Int
+
+  # The password used to protect the content of the object
+  password: String
+
+  # The slug of the object
+  slug: String
+
+  # The status of the object
+  status: PostStatusEnum
+
+  # The title of the object
+  title: String
+}
+
+# The payload for the createConfig mutation
+type CreateConfigPayload {
+  # The Post object mutation type.
+  config: Config
+
+  # If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  clientMutationId: String
+}
+
 # Input for the createCoupon mutation
 input CreateCouponInput {
   # The amount of discount. Should always be numeric, even if setting a percentage.
@@ -4091,6 +4283,30 @@ type DeleteCommentPayload {
   comment: Comment
 
   # The deleted comment ID
+  deletedId: ID
+}
+
+# Input for the deleteConfig mutation
+input DeleteConfigInput {
+  # This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  clientMutationId: String
+
+  # Whether the object should be force deleted instead of being moved to the trash
+  forceDelete: Boolean
+
+  # The ID of the Config to delete
+  id: ID!
+}
+
+# The payload for the deleteConfig mutation
+type DeleteConfigPayload {
+  # The object before it was deleted
+  config: Config
+
+  # If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  clientMutationId: String
+
+  # The ID of the deleted object
   deletedId: ID
 }
 
@@ -7312,7 +7528,7 @@ enum MenuItemNodeIdTypeEnum {
 }
 
 # Deprecated in favor of MenuItemLinkeable Interface
-union MenuItemObjectUnion = Post | Page | RealProject | Category | Tag | ProductCategory | ProductTag | Gender
+union MenuItemObjectUnion = Post | Page | RealProject | Config | Category | Tag | ProductCategory | ProductTag | Gender
 
 # Connection between the MenuItem type and the Menu type
 type MenuItemToMenuConnectionEdge {
@@ -15646,6 +15862,12 @@ type RootMutation {
     input: CreateCommentInput!
   ): CreateCommentPayload
 
+  # The payload for the createConfig mutation
+  createConfig(
+    # Input for the createConfig mutation
+    input: CreateConfigInput!
+  ): CreateConfigPayload
+
   # The payload for the createCoupon mutation
   createCoupon(
     # Input for the createCoupon mutation
@@ -15759,6 +15981,12 @@ type RootMutation {
     # Input for the deleteComment mutation
     input: DeleteCommentInput!
   ): DeleteCommentPayload
+
+  # The payload for the deleteConfig mutation
+  deleteConfig(
+    # Input for the deleteConfig mutation
+    input: DeleteConfigInput!
+  ): DeleteConfigPayload
 
   # The payload for the deleteCoupon mutation
   deleteCoupon(
@@ -15957,6 +16185,12 @@ type RootMutation {
     # Input for the updateComment mutation
     input: UpdateCommentInput!
   ): UpdateCommentPayload
+
+  # The payload for the updateConfig mutation
+  updateConfig(
+    # Input for the updateConfig mutation
+    input: UpdateConfigInput!
+  ): UpdateConfigPayload
 
   # The payload for the updateCoupon mutation
   updateCoupon(
@@ -16164,6 +16398,51 @@ type RootQuery {
     # Arguments for filtering the connection
     where: RootQueryToCommentConnectionWhereArgs
   ): RootQueryToCommentConnection
+
+  # An object of the Config Type. 
+  config(
+    # The globally unique identifier of the object.
+    id: ID!
+
+    # Type of unique identifier to fetch by. Default is Global ID
+    idType: ConfigIdType
+
+    # Whether to return the node as a preview instance
+    asPreview: Boolean
+  ): Config
+
+  # A Config object
+  configBy(
+    # Get the object by its global ID
+    id: ID
+
+    # Get the Config by its database ID
+    configId: Int
+
+    # Get the Config by its uri
+    uri: String
+
+    # Get the Config by its slug (only available for non-hierarchical types)
+    slug: String
+  ): Config @deprecated(reason: "Deprecated in favor of using the single entry point for this type with ID and IDType fields. For example, instead of postBy( id: &quot;&quot; ), use post(id: &quot;&quot; idType: &quot;&quot;)")
+
+  # Connection between the RootQuery type and the Config type
+  configs(
+    # The number of items to return after the referenced "after" cursor
+    first: Int
+
+    # The number of items to return before the referenced "before" cursor
+    last: Int
+
+    # Cursor used along with the "first" argument to reference where in the dataset to get data
+    after: String
+
+    # Cursor used along with the "last" argument to reference where in the dataset to get data
+    before: String
+
+    # Arguments for filtering the connection
+    where: RootQueryToConfigConnectionWhereArgs
+  ): RootQueryToConfigConnection
 
   # A node used to manage content
   contentNode(
@@ -17387,6 +17666,81 @@ input RootQueryToCommentConnectionWhereArgs {
 
   # Include comments for a specific user ID.
   userId: ID
+}
+
+# Connection between the RootQuery type and the Config type
+type RootQueryToConfigConnection {
+  # Edges for the RootQueryToConfigConnection connection
+  edges: [RootQueryToConfigConnectionEdge]
+
+  # The nodes of the connection, without the edges
+  nodes: [Config]
+
+  # Information about pagination in a connection.
+  pageInfo: WPPageInfo
+}
+
+# An edge in a connection
+type RootQueryToConfigConnectionEdge {
+  # A cursor for use in pagination
+  cursor: String
+
+  # The item at the end of the edge
+  node: Config
+}
+
+# Arguments for filtering the RootQueryToConfigConnection connection
+input RootQueryToConfigConnectionWhereArgs {
+  # Filter the connection based on dates
+  dateQuery: DateQueryInput
+
+  # True for objects with passwords; False for objects without passwords; null for all objects with or without passwords
+  hasPassword: Boolean
+
+  # Specific ID of the object
+  id: Int
+
+  # Array of IDs for the objects to retrieve
+  in: [ID]
+
+  # Get objects with a specific mimeType property
+  mimeType: MimeTypeEnum
+
+  # Slug / post_name of the object
+  name: String
+
+  # Specify objects to retrieve. Use slugs
+  nameIn: [String]
+
+  # Specify IDs NOT to retrieve. If this is used in the same query as "in", it will be ignored
+  notIn: [ID]
+
+  # What paramater to use to order the objects by.
+  orderby: [PostObjectsConnectionOrderbyInput]
+
+  # Use ID to return only children. Use 0 to return only top-level items
+  parent: ID
+
+  # Specify objects whose parent is in an array
+  parentIn: [ID]
+
+  # Specify posts whose parent is not in an array
+  parentNotIn: [ID]
+
+  # Show posts with a specific password.
+  password: String
+
+  # Show Posts based on a keyword search
+  search: String
+
+  # Retrieve posts where post status is in an array.
+  stati: [PostStatusEnum]
+
+  # Show posts with a specific status.
+  status: PostStatusEnum
+
+  # Title of the object
+  title: String
 }
 
 # Connection between the RootQuery type and the ContentNode type
@@ -19602,6 +19956,7 @@ type SEOContentTypeArchive {
 
 # The Yoast SEO search appearance content types
 type SEOContentTypes {
+  config: SEOContentType
   mediaItem: SEOContentType
   page: SEOContentType
   post: SEOContentType
@@ -21819,6 +22174,45 @@ type UpdateCommentPayload {
 
   # Whether the mutation succeeded. If the comment is not approved, the server will not return the comment to a non authenticated user, but a success message can be returned if the create succeeded, and the client can optimistically add the comment to the client cache
   success: Boolean
+}
+
+# Input for the updateConfig mutation
+input UpdateConfigInput {
+  # This is an ID that can be passed to a mutation by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  clientMutationId: String
+
+  # The content of the object
+  content: String
+
+  # The date of the object. Preferable to enter as year/month/day (e.g. 01/31/2017) as it will rearrange date as fit if it is not specified. Incomplete dates may have unintended results for example, "2017" as the input will use current date with timestamp 20:17 
+  date: String
+
+  # The ID of the Config object
+  id: ID!
+
+  # A field used for ordering posts. This is typically used with nav menu items or for special ordering of hierarchical content types.
+  menuOrder: Int
+
+  # The password used to protect the content of the object
+  password: String
+
+  # The slug of the object
+  slug: String
+
+  # The status of the object
+  status: PostStatusEnum
+
+  # The title of the object
+  title: String
+}
+
+# The payload for the updateConfig mutation
+type UpdateConfigPayload {
+  # The Post object mutation type.
+  config: Config
+
+  # If a &#039;clientMutationId&#039; input is provided to the mutation, it will be returned as output on the mutation. This ID can be used by the client to track the progress of mutations and catch possible duplicate mutation submissions.
+  clientMutationId: String
 }
 
 # Input for the updateCoupon mutation
