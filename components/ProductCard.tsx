@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ProductCardFragment } from '../generated/graphql'
+import DewImage from './DewImage'
 import { ProductPrice } from './ProductPrice'
 
 export function ProductCard({ entity }: { entity: ProductCardFragment }) {
@@ -8,12 +9,10 @@ export function ProductCard({ entity }: { entity: ProductCardFragment }) {
     <Link href={href as string}>
       <a className="border rounded shadow-sm hover:shadow-lg">
         <div className="relative aspect-w-1 aspect-h-1">
-          <img
+          <DewImage
             loading="lazy"
-            src={
-              entity.image?.mediumUrl ||
-              'http://docker:8080/wp-content/uploads/woocommerce-placeholder.png'
-            }
+            src={entity.image?.mediumUrl}
+            layout="fill"
             alt={entity.name || undefined}
           />
         </div>

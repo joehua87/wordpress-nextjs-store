@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { useKeenSlider } from 'keen-slider/react'
 import clsx from 'clsx'
 import { MediaItemFragment } from '../generated/graphql'
+import DewImage from './DewImage'
 
 export interface ProductSliderProps {
   className?: string
@@ -51,11 +52,12 @@ export default function ProductSlider({
               slider?.moveToSlide(idx)
             }}
           >
-            <img
+            <DewImage
               loading="lazy"
+              layout="fill"
               src={x.mediumUrl || ''}
               alt=""
-              className="absolute inset-0 object-cover w-full h-full"
+              className="object-cover"
             />
             {idx === 4 && images.length > 5 && (
               <div
@@ -78,9 +80,10 @@ export default function ProductSlider({
         {images.map((x, idx) => (
           <div key={x.id} className="min-w-full keen-slider__slide">
             <div className="w-full aspect-w-1 aspect-h-1">
-              <img
+              <DewImage
                 loading="lazy"
-                className="absolute inset-0 object-cover w-full h-full"
+                layout="fill"
+                className="object-cover"
                 alt=""
                 src={x.sourceUrl || ''}
                 onClick={() => {

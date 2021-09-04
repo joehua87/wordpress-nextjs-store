@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { PostCardFragment } from '../generated/graphql'
+import DewImage from './DewImage'
 
 export function PostCard({ entity }: { entity: PostCardFragment }) {
   const href = entity.link && new URL(entity.link).pathname
@@ -7,13 +8,11 @@ export function PostCard({ entity }: { entity: PostCardFragment }) {
     <Link href={href as string}>
       <a className="border rounded shadow-sm hover:shadow-lg">
         <div className="relative aspect-w-4 aspect-h-3">
-          <img
+          <DewImage
             loading="lazy"
             className="object-cover"
-            src={
-              entity.featuredImage?.node?.mediumUrl ||
-              'http://docker:8080/wp-content/uploads/woocommerce-placeholder.png'
-            }
+            src={entity.featuredImage?.node?.mediumLargeUrl}
+            layout="fill"
             alt={entity.title || undefined}
           />
         </div>

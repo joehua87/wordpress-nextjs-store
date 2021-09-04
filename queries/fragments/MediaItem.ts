@@ -7,5 +7,7 @@ export const MediaItemFragment = gql`
     title
     sourceUrl
     mediumUrl: sourceUrl(size: MEDIUM)
+    mediumLargeUrl: sourceUrl(size: MEDIUM_LARGE)
+    largeUrl: sourceUrl(size: LARGE)
   }
 `
