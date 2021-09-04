@@ -9,8 +9,28 @@ import { PostCardList } from '../components/PostCardList'
 import { ProductCardList } from '../components/ProductCardList'
 import { edgesToList, fetchData } from '../utils'
 import { queries } from '../queries/queries'
+import { parseBlocks } from '../utils/block'
 
-const Home: NextPage<{ data: THomePageQuery }> = ({ data }) => {
+export interface GalleryItem {
+  id: string | null
+  src: string | null
+  alt: string | null
+  caption: string | null
+  description: string | null
+  href: string | null
+}
+
+export interface Gallery {
+  id: string
+  items?: GalleryItem[]
+}
+
+const Home: NextPage<{ data: THomePageQuery; blocks: Record<string, any> }> = ({
+  data,
+  blocks,
+}) => {
+  const slider = blocks['ahihi'] as Gallery
+
   return (
     <div className="container mx-auto">
       <Head>
@@ -20,6 +40,9 @@ const Home: NextPage<{ data: THomePageQuery }> = ({ data }) => {
           content={data.allSettings?.generalSettingsDescription || ''}
         />
       </Head>
+      {slider?.items?.map((item) => (
+        <img key={item.id} src={item.src || ''} alt={item.alt || undefined} />
+      ))}
       <div className="mt-4">
         <h2 className="font-bold text-xl mb-2">Posts</h2>
         {data.posts && <PostCardList entities={edgesToList(data.posts)} />}
@@ -49,5 +72,9 @@ export const getStaticProps: GetStaticProps = async () => {
     HomePageQuery,
     HomePageQueryVariables
   >(queries.HomePageQuery, {})
-  return { props: data ? { data } : { error }, revalidate: 10 }
+  // const snap1 = Date.now()
+  const blocks = parseBlocks(data?.config?.content)
+  // const snap2 = Date.now()
+  // console.log('parse', snap2 - snap1)
+  return { props: data ? { data, blocks } : { error }, revalidate: 10 }
 }
