@@ -5,12 +5,28 @@ import Router from 'next/router'
 
 if (typeof window !== 'undefined') {
   import('topbar').then(({ default: topbar }) => {
+    let loading = false
     Router.events.on('routeChangeStart', (url) => {
-      console.log(`Loading: ${url}`)
-      topbar.show()
+      loading = true
+      setTimeout(() => {
+        console.log(`Loading: ${url}`)
+        if (loading) {
+          topbar.show()
+        }
+      }, 500)
     })
-    Router.events.on('routeChangeComplete', () => topbar.hide())
-    Router.events.on('routeChangeError', () => topbar.hide())
+    Router.events.on('routeChangeComplete', () => {
+      if (loading) {
+        topbar.hide()
+      }
+      loading = false
+    })
+    Router.events.on('routeChangeError', () => {
+      if (loading) {
+        topbar.hide()
+      }
+      loading = false
+    })
   })
 }
 
@@ -30,7 +46,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </Link>
         </nav>
       </header>
-      <main className="mt-8">
+      <main className="">
         <Component {...pageProps} />
       </main>
     </div>
