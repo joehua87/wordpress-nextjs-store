@@ -12,8 +12,13 @@ import {
 import { edgesToList, fetchData, notEmpty } from '../utils'
 import { queries } from '../queries/queries'
 import { getAggregate } from '../services'
-import { ProductFilter, ProductAggregate } from '../types'
+import {
+  ProductFilter as WordpressProductFilter,
+  ProductAggregate,
+  ProductFilter,
+} from '../types'
 import { Drilldown } from '../components/Drilldown'
+import { pickBy } from 'ramda'
 
 const Search: NextPage<{
   data: SearchPageQuery
@@ -57,7 +62,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const size = urlQueryItemToIntArray(query.size)
   const color = urlQueryItemToIntArray(query.color)
 
-  const filter: ProductFilter = {
+  const filter: WordpressProductFilter = {
     attributes: [],
   }
 
@@ -114,6 +119,13 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   })
   const app = await fetchData<AppQuery, AppQueryVariables>(queries.AppQuery)
   return {
-    props: data ? { data, app: app.data, filter, aggregate } : { error },
+    props: data
+      ? {
+          data,
+          app: app.data,
+          filter: pickBy((x) => !!x, { category, gender, size, color }),
+          aggregate,
+        }
+      : { error },
   }
 }

@@ -76,7 +76,12 @@ export function Drilldown({
                   (x.term.__typename === 'ProductCategory' &&
                     x.term.termTaxonomyId == filter.category) ||
                   (x.term.__typename === 'Gender' &&
-                    x.term.termTaxonomyId == filter.gender)
+                    x.term.termTaxonomyId == filter.gender) ||
+                  (x.term.__typename === 'PaColor' &&
+                    x.term.termTaxonomyId == filter.color) ||
+                  (x.term.__typename === 'PaSize' &&
+                    x.term.termTaxonomyId == filter.size)
+
                 return (
                   <div key={x.term.id} className="flex">
                     <div

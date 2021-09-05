@@ -38,6 +38,13 @@ export interface ProductAggregate {
 export interface ProductFilter {
   category?: number[]
   gender?: number[]
+  size?: number[]
+  color?: number[]
+}
+
+export interface ProductFilter {
+  category?: number[]
+  gender?: number[]
   attributes?: {
     attribute: string
     operator: 'in' | 'and'
