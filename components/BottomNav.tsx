@@ -5,24 +5,42 @@ import {
   IconShoppingCart,
   IconUser,
 } from '@tabler/icons'
+import { useRouter } from 'next/router'
+import clsx from 'clsx'
 
 export function BottomNav() {
+  const { pathname } = useRouter()
   return (
     <nav className="bg-rose-100 h-12 fixed bottom-0 items-center grid grid-cols-5 gap-2 lg:hidden w-full">
       <Link href="/">
-        <a className="flex flex-col items-center">
+        <a
+          className={clsx(
+            'flex flex-col items-center',
+            pathname === '/' && 'font-bold',
+          )}
+        >
           <IconHome />
           <span className="text-center text-xs">Trang chủ</span>
         </a>
       </Link>
-      <Link href="/products">
-        <a className="flex flex-col items-center">
+      <Link href="/search">
+        <a
+          className={clsx(
+            'flex flex-col items-center',
+            pathname === '/search' && 'font-bold',
+          )}
+        >
           <IconPackage />
           <span className="text-center text-xs">Sản phẩm</span>
         </a>
       </Link>
       <Link href="/sale">
-        <a className="flex flex-col items-center relative">
+        <a
+          className={clsx(
+            'flex flex-col items-center relative',
+            pathname === '/sale' && 'font-bold',
+          )}
+        >
           <IconPackage />
           <span className="text-center text-xs">Sale</span>
           <span
@@ -34,13 +52,23 @@ export function BottomNav() {
         </a>
       </Link>
       <Link href="/user">
-        <a className="flex flex-col items-center">
+        <a
+          className={clsx(
+            'flex flex-col items-center',
+            pathname === '/user' && 'font-bold',
+          )}
+        >
           <IconUser />
           <span className="text-center text-xs">Tài khoản</span>
         </a>
       </Link>
       <Link href="/cart">
-        <a className="flex flex-col items-center">
+        <a
+          className={clsx(
+            'flex flex-col items-center',
+            pathname === '/cart' && 'font-bold',
+          )}
+        >
           <IconShoppingCart />
           <span className="text-center text-xs">Giỏ hàng</span>
         </a>
