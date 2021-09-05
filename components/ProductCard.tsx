@@ -17,9 +17,9 @@ export function ProductCard({ entity }: { entity: ProductCardFragment }) {
           />
         </div>
         <div className="border-t py-1 px-2">
-          <div>{entity.name}</div>
+          <h3 className="text-sm line-clamp-2">{entity.name}</h3>
           <div>
-            <ProductPrice entity={entity} />
+            <ProductPrice className="text-sm" entity={entity} />
           </div>
         </div>
       </a>

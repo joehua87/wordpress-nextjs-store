@@ -25,6 +25,9 @@ export function DesktopHeader() {
         <Link href="/posts">
           <a className="ml-2">Posts</a>
         </Link>
+        <Link href="/search">
+          <a className="ml-2">Tìm kiếm</a>
+        </Link>
       </nav>
     </header>
   )

@@ -1,11 +1,18 @@
+import clsx from 'clsx'
 import { ProductCardFragment } from '../generated/graphql'
 
-export function ProductPrice({ entity }: { entity: ProductCardFragment }) {
+export function ProductPrice({
+  entity,
+  className,
+}: {
+  entity: ProductCardFragment
+  className?: string
+}) {
   if (entity.__typename === 'GroupProduct') {
     return null
   }
   return (
-    <div className="flex">
+    <div className={clsx('flex', className)}>
       {entity.regularPrice !== entity.price && (
         <div className="mr-2 line-through">{entity.regularPrice}</div>
       )}

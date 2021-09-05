@@ -9,7 +9,6 @@ if (typeof window !== 'undefined') {
     Router.events.on('routeChangeStart', (url) => {
       loading = true
       setTimeout(() => {
-        console.log(`Loading: ${url}`)
         if (loading) {
           topbar.show()
         }

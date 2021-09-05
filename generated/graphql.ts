@@ -12747,6 +12747,11 @@ export type ProductCardListFragment = { __typename?: 'ProductCategoryToProductCo
       & ProductCard_VariableProduct_Fragment
     )> }>>> };
 
+export type AppQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AppQuery = { __typename?: 'RootQuery', config?: Maybe<{ __typename?: 'Config', content?: Maybe<string> }>, allSettings?: Maybe<{ __typename?: 'Settings', generalSettingsTitle?: Maybe<string>, generalSettingsDescription?: Maybe<string> }>, terms?: Maybe<{ __typename?: 'RootQueryToTermNodeConnection', nodes?: Maybe<Array<Maybe<{ __typename: 'Category', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> } | { __typename: 'Gender', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> } | { __typename: 'PaColor', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> } | { __typename: 'PaSize', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> } | { __typename: 'PostFormat', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> } | { __typename: 'ProductCategory', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> } | { __typename: 'ProductTag', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> } | { __typename: 'ProductType', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> } | { __typename: 'ShippingClass', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> } | { __typename: 'Tag', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> } | { __typename: 'VisibleProduct', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> }>>> }> };
+
 export type GenderPageQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
@@ -12846,6 +12851,25 @@ export type ProductsPageQueryVariables = Exact<{
 
 
 export type ProductsPageQuery = { __typename?: 'RootQuery', products?: Maybe<{ __typename?: 'RootQueryToProductConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'RootQueryToProductConnectionEdge', node?: Maybe<(
+        { __typename?: 'ExternalProduct' }
+        & ProductCard_ExternalProduct_Fragment
+      ) | (
+        { __typename?: 'GroupProduct' }
+        & ProductCard_GroupProduct_Fragment
+      ) | (
+        { __typename?: 'SimpleProduct' }
+        & ProductCard_SimpleProduct_Fragment
+      ) | (
+        { __typename?: 'VariableProduct' }
+        & ProductCard_VariableProduct_Fragment
+      )> }>>>, pageInfo?: Maybe<{ __typename?: 'WPPageInfo', total?: Maybe<number> }> }> };
+
+export type SearchPageQueryVariables = Exact<{
+  where?: Maybe<RootQueryToProductConnectionWhereArgs>;
+}>;
+
+
+export type SearchPageQuery = { __typename?: 'RootQuery', products?: Maybe<{ __typename?: 'RootQueryToProductConnection', edges?: Maybe<Array<Maybe<{ __typename?: 'RootQueryToProductConnectionEdge', node?: Maybe<(
         { __typename?: 'ExternalProduct' }
         & ProductCard_ExternalProduct_Fragment
       ) | (
