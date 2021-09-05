@@ -50,7 +50,7 @@ export function Drilldown({
         const { code, name } = taxonomiesMap[k]
 
         return (
-          <div key={k} className="bg-gray-50 mb-4">
+          <div key={k} className="mb-4">
             <div className="bg-gray-200 px-2 py-0.5 flex justify-between">
               <div className="font-bold text-sm">{name}</div>
               {router.query[code] && (

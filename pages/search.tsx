@@ -19,6 +19,8 @@ import {
 } from '../types'
 import { Drilldown } from '../components/Drilldown'
 import { pickBy } from 'ramda'
+import { IconFilter, IconSearch, IconX } from '@tabler/icons'
+import { useState } from 'react'
 
 const Search: NextPage<{
   data: SearchPageQuery
@@ -26,14 +28,31 @@ const Search: NextPage<{
   app: AppQuery
   filter: ProductFilter
 }> = ({ app, data, aggregate, filter }) => {
+  const [isShowFilter, setIsShowFilter] = useState(false)
+
   return (
-    <div className="container mt-4">
+    <div className="container mt-12">
       <Head>
         <title>Search</title>
         <meta name="description" content="Product list" />
       </Head>
+      <div className="bg-rose-700 fixed top-0 w-full h-12 z-10 left-0 px-2 flex items-center">
+        <div className="flex items-center border bg-white px-2 py-0.5 flex-auto rounded">
+          <input className="w-full" placeholder="Tìm kiếm…" />
+          <IconSearch className="ml-2" />
+        </div>
+        <button
+          className="ml-2 text-white"
+          aria-label="Show filter"
+          onClick={() => {
+            setIsShowFilter(true)
+          }}
+        >
+          <IconFilter />
+        </button>
+      </div>
       <div className="flex items-start">
-        <div className="w-40 flex-none top-0 sticky mr-4">
+        <div className="w-40 flex-none top-0 sticky mr-4 hidden lg:block">
           <Drilldown app={app} aggregate={aggregate} filter={filter} />
         </div>
         <div className="flex-auto">
@@ -41,6 +60,21 @@ const Search: NextPage<{
           <ProductCardList entities={edgesToList(data.products)} />
         </div>
       </div>
+      {isShowFilter && (
+        <div className="fixed top-12 bottom-0 left-0 right-0 overflow-y-scroll bg-white">
+          <div className="p-2 flex items-center justify-between">
+            <div>{data.products?.pageInfo?.total} products</div>
+            <button
+              onClick={() => {
+                setIsShowFilter(false)
+              }}
+            >
+              <IconX />
+            </button>
+          </div>
+          <Drilldown app={app} aggregate={aggregate} filter={filter} />
+        </div>
+      )}
     </div>
   )
 }
