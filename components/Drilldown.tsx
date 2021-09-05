@@ -4,8 +4,12 @@ import { notEmpty } from '../utils'
 import { ProductFilter, ProductAggregate } from '../types'
 import { useRouter } from 'next/router'
 import clsx from 'clsx'
+import { IconX } from '@tabler/icons'
 
-const taxonomiesMap: Record<string, { code: string; name: string }> = {
+const taxonomiesMap: Record<
+  string,
+  { code: 'category' | 'gender' | 'size' | 'color'; name: string }
+> = {
   ProductCategory: { code: 'category', name: 'Danh mục' },
   Gender: { code: 'gender', name: 'Giới tính' },
   PaSize: { code: 'size', name: 'Kích thước' },
@@ -48,6 +52,7 @@ export function Drilldown({
           items[k],
         )
         const { code, name } = taxonomiesMap[k]
+        const currentItems = filter[code] || []
 
         return (
           <div key={k} className="mb-4">
@@ -72,34 +77,41 @@ export function Drilldown({
             </div>
             <div className="text-xs px-2 py-0.5 max-h-40 overflow-y-scroll">
               {terms.map((x) => {
-                const isActive =
-                  (x.term.__typename === 'ProductCategory' &&
-                    x.term.termTaxonomyId == filter.category) ||
-                  (x.term.__typename === 'Gender' &&
-                    x.term.termTaxonomyId == filter.gender) ||
-                  (x.term.__typename === 'PaColor' &&
-                    x.term.termTaxonomyId == filter.color) ||
-                  (x.term.__typename === 'PaSize' &&
-                    x.term.termTaxonomyId == filter.size)
+                const termId = x.term.termTaxonomyId as number
+                const isActive = currentItems.includes(termId)
 
                 return (
                   <div key={x.term.id} className="flex">
                     <div
                       className={clsx(
-                        'cursor-pointer',
+                        'cursor-pointer flex items-center',
                         isActive && 'font-bold',
                       )}
                       onClick={() => {
+                        const nextItems = currentItems?.includes(termId)
+                          ? currentItems.filter((x) => x !== termId)
+                          : [...currentItems, termId]
+
                         router.push({
                           pathname: router.pathname,
-                          query: {
+                          query: pickBy((x) => !!x, {
                             ...router.query,
-                            [code]: x.term.termTaxonomyId,
-                          },
+                            [code]:
+                              nextItems.length > 0
+                                ? nextItems.join(',')
+                                : undefined,
+                          }),
                         })
                       }}
                     >
-                      {x.term.name} ({x.count})
+                      <span>
+                        {x.term.name} ({x.count})
+                      </span>
+                      {isActive && (
+                        <span>
+                          <IconX className="h-4 w-4" />
+                        </span>
+                      )}
                     </div>
                   </div>
                 )

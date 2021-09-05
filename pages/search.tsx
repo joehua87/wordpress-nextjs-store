@@ -36,7 +36,7 @@ const Search: NextPage<{
         <title>Search</title>
         <meta name="description" content="Product list" />
       </Head>
-      <div className="bg-rose-700 fixed top-0 w-full h-12 z-10 left-0 px-2 flex items-center">
+      <div className="bg-rose-700 fixed top-0 w-full h-12 z-10 left-0 px-2 flex items-center lg:hidden">
         <div className="flex items-center border bg-white px-2 py-0.5 flex-auto rounded">
           <input className="w-full" placeholder="Tìm kiếm…" />
           <IconSearch className="ml-2" />
@@ -56,7 +56,13 @@ const Search: NextPage<{
           <Drilldown app={app} aggregate={aggregate} filter={filter} />
         </div>
         <div className="flex-auto">
-          <div>{data.products?.pageInfo?.total} products</div>
+          <div className="p-2 bg-rose-100 mb-2 rounded flex items-center justify-between">
+            {data.products?.pageInfo?.total} products
+            <div>TODO: Pagination</div>
+          </div>
+          <div className="p-2 rounded bg-yellow-100 mb-2">
+            TODO: Removable filter goes here
+          </div>
           <ProductCardList entities={edgesToList(data.products)} />
         </div>
       </div>
