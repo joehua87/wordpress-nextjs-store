@@ -2,8 +2,8 @@ import Link from 'next/link'
 
 export function DesktopHeader() {
   return (
-    <header className="bg-rose-100 h-12 flex items-center">
-      <nav className="container mx-auto">
+    <header className="bg-rose-100 h-12 items-center hidden lg:flex">
+      <nav className="container">
         <Link href="/">
           <a>Home</a>
         </Link>

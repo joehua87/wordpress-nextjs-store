@@ -11,7 +11,7 @@ import { queries } from '../../queries/queries'
 
 const Posts: NextPage<{ data: PostsPageQuery }> = ({ data }) => {
   return (
-    <div className="container mx-auto">
+    <div className="container">
       <Head>
         <title>Posts</title>
         <meta name="description" content="Post list" />

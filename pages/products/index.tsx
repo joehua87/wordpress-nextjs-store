@@ -10,7 +10,7 @@ import { queries } from '../../queries/queries'
 
 const Products: NextPage<{ data: ProductsPageQuery }> = ({ data }) => {
   return (
-    <div className="container mx-auto">
+    <div className="container">
       <Head>
         <title>Products</title>
         <meta name="description" content="Product list" />

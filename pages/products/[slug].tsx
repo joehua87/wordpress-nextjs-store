@@ -13,9 +13,9 @@ const Product: NextPage<{ data: ProductPageQuery }> = ({ data }) => {
     ?.map((x) => x?.sourceUrl)
     .filter(notEmpty)
   return (
-    <div className="container mx-auto">
+    <div className="container">
       <EntitySeo entity={data.product?.seo} />
-      <div className="flex mt-4">
+      <div className="flex flex-wrap mt-4">
         <div className="w-full lg:w-3/5">
           <ProductSlider
             images={data.product?.galleryImages?.nodes?.filter(notEmpty) || []}

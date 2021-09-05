@@ -31,11 +31,7 @@ const Home: NextPage<{ data: THomePageQuery; blocks: Record<string, any> }> = ({
         />
       </Head>
       <Carousel gallery={slider} />
-      <div className="container mx-auto">
-        <div className="mt-4">
-          <h2 className="font-bold text-xl mb-2">Posts</h2>
-          {data.posts && <PostCardList entities={edgesToList(data.posts)} />}
-        </div>
+      <div className="container">
         <div className="mt-4">
           {data.productCategories?.edges?.map((item) => {
             if (!item?.node?.products) {
@@ -51,6 +47,10 @@ const Home: NextPage<{ data: THomePageQuery; blocks: Record<string, any> }> = ({
               </div>
             )
           })}
+        </div>
+        <div className="mt-4">
+          <h2 className="font-bold text-xl mb-2">Posts</h2>
+          {data.posts && <PostCardList entities={edgesToList(data.posts)} />}
         </div>
       </div>
     </>

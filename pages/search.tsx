@@ -27,7 +27,7 @@ const Search: NextPage<{
   filter: ProductFilter
 }> = ({ app, data, aggregate, filter }) => {
   return (
-    <div className="container mx-auto mt-4">
+    <div className="container mt-4">
       <Head>
         <title>Search</title>
         <meta name="description" content="Product list" />

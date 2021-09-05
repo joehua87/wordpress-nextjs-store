@@ -7,7 +7,7 @@ import { queries } from '../../queries/queries'
 
 const Post: NextPage<{ data: PostPageQuery }> = ({ data }) => {
   return (
-    <div className="container mx-auto">
+    <div className="container">
       <EntitySeo entity={data.post?.seo} />
       <h1 className="text-2xl font-serif">{data.post?.title}</h1>
       <Toc content={data.post?.content} />

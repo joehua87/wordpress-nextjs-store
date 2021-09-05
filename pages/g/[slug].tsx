@@ -9,7 +9,7 @@ import { ProductCardList } from '../../components/ProductCardList'
 
 const Gender: NextPage<{ data: GenderPageQuery }> = ({ data }) => {
   return (
-    <div className="container mx-auto">
+    <div className="container">
       <ProductCardList entities={edgesToList(data.products)} />
     </div>
   )

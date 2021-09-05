@@ -2,6 +2,7 @@ import '../styles/globals.css'
 import type { AppProps } from 'next/app'
 import Router from 'next/router'
 import { DesktopHeader } from '../components/DesktopHeader'
+import { BottomNav } from '../components/BottomNav'
 
 if (typeof window !== 'undefined') {
   import('topbar').then(({ default: topbar }) => {
@@ -36,6 +37,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <main className="">
         <Component {...pageProps} />
       </main>
+      <BottomNav />
     </div>
   )
 }
