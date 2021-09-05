@@ -1,6 +1,7 @@
 import { gql } from '@urql/core'
 import { EntitySeoFragment } from '../fragments/EntitySeo'
 import { MediaItemFragment } from '../fragments/MediaItem'
+import { ProductCardFragment } from '../fragments/ProductCard'
 
 export const ProductPageQuery = gql`
   query ProductPage($slug: ID!) {
@@ -27,6 +28,11 @@ export const ProductPageQuery = gql`
       }
       seo {
         ...EntitySeo
+      }
+      related(first: 12) {
+        nodes {
+          ...ProductCard
+        }
       }
       ... on SimpleProduct {
         salePrice
@@ -56,4 +62,5 @@ export const ProductPageQuery = gql`
   }
   ${MediaItemFragment}
   ${EntitySeoFragment}
+  ${ProductCardFragment}
 `

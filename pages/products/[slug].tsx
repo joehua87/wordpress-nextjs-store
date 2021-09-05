@@ -7,11 +7,10 @@ import { EntitySeo } from '../../components/EntitySeo'
 import { fetchData, notEmpty } from '../../utils'
 import { queries } from '../../queries/queries'
 import ProductSlider from '../../components/ProductSlider'
+import { ProductCardList } from '../../components/ProductCardList'
 
 const Product: NextPage<{ data: ProductPageQuery }> = ({ data }) => {
-  const images = data.product?.galleryImages?.nodes
-    ?.map((x) => x?.sourceUrl)
-    .filter(notEmpty)
+  const relatedProducts = data.product?.related?.nodes?.filter(notEmpty)
   return (
     <div className="container">
       <EntitySeo entity={data.product?.seo} />
@@ -25,6 +24,14 @@ const Product: NextPage<{ data: ProductPageQuery }> = ({ data }) => {
           <h1 className="text-2xl font-serif">{data.product?.name}</h1>
         </div>
       </div>
+      {relatedProducts && (
+        <div className="mt-8">
+          <h2 className="text-xl font-serif font-bold mb-2">
+            Sản phẩm liên quan
+          </h2>
+          <ProductCardList entities={relatedProducts} />
+        </div>
+      )}
     </div>
   )
 }
