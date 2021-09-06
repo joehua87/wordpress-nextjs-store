@@ -62,7 +62,7 @@ export interface CartData {
   shipping_rates: ShippingRate[]
   shipping_address: ShippingAddress
   billing_address: BillingAddress
-  items: Item2[]
+  items: OrderItem[]
   items_count: number
   items_weight: number
   needs_payment: boolean
@@ -168,7 +168,7 @@ export interface BillingAddress {
   phone: string
 }
 
-export interface Item2 {
+export interface OrderItem {
   key: string
   id: number
   quantity: number

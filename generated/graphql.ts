@@ -12711,22 +12711,22 @@ export type PostCardListFragment = { __typename?: 'RootQueryToPostConnection', e
       & PostCardFragment
     )> }>>> };
 
-export type ProductCard_ExternalProduct_Fragment = { __typename: 'ExternalProduct', salePrice?: Maybe<string>, regularPrice?: Maybe<string>, price?: Maybe<string>, id: string, slug?: Maybe<string>, link?: Maybe<string>, name?: Maybe<string>, featured?: Maybe<boolean>, image?: Maybe<(
+export type ProductCard_ExternalProduct_Fragment = { __typename: 'ExternalProduct', salePrice?: Maybe<string>, regularPrice?: Maybe<string>, price?: Maybe<string>, id: string, databaseId: number, slug?: Maybe<string>, link?: Maybe<string>, name?: Maybe<string>, featured?: Maybe<boolean>, image?: Maybe<(
     { __typename?: 'MediaItem' }
     & MediaItemFragment
   )>, attributes?: Maybe<{ __typename?: 'ProductToProductAttributeConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'GlobalProductAttribute', id: string, label: string, name: string } | { __typename?: 'LocalProductAttribute', id: string, label: string, name: string }>>> }> };
 
-export type ProductCard_GroupProduct_Fragment = { __typename: 'GroupProduct', id: string, slug?: Maybe<string>, link?: Maybe<string>, name?: Maybe<string>, featured?: Maybe<boolean>, image?: Maybe<(
+export type ProductCard_GroupProduct_Fragment = { __typename: 'GroupProduct', id: string, databaseId: number, slug?: Maybe<string>, link?: Maybe<string>, name?: Maybe<string>, featured?: Maybe<boolean>, image?: Maybe<(
     { __typename?: 'MediaItem' }
     & MediaItemFragment
   )>, attributes?: Maybe<{ __typename?: 'ProductToProductAttributeConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'GlobalProductAttribute', id: string, label: string, name: string } | { __typename?: 'LocalProductAttribute', id: string, label: string, name: string }>>> }> };
 
-export type ProductCard_SimpleProduct_Fragment = { __typename: 'SimpleProduct', salePrice?: Maybe<string>, regularPrice?: Maybe<string>, price?: Maybe<string>, id: string, slug?: Maybe<string>, link?: Maybe<string>, name?: Maybe<string>, featured?: Maybe<boolean>, image?: Maybe<(
+export type ProductCard_SimpleProduct_Fragment = { __typename: 'SimpleProduct', salePrice?: Maybe<string>, regularPrice?: Maybe<string>, price?: Maybe<string>, id: string, databaseId: number, slug?: Maybe<string>, link?: Maybe<string>, name?: Maybe<string>, featured?: Maybe<boolean>, image?: Maybe<(
     { __typename?: 'MediaItem' }
     & MediaItemFragment
   )>, attributes?: Maybe<{ __typename?: 'ProductToProductAttributeConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'GlobalProductAttribute', id: string, label: string, name: string } | { __typename?: 'LocalProductAttribute', id: string, label: string, name: string }>>> }> };
 
-export type ProductCard_VariableProduct_Fragment = { __typename: 'VariableProduct', salePrice?: Maybe<string>, regularPrice?: Maybe<string>, price?: Maybe<string>, id: string, slug?: Maybe<string>, link?: Maybe<string>, name?: Maybe<string>, featured?: Maybe<boolean>, image?: Maybe<(
+export type ProductCard_VariableProduct_Fragment = { __typename: 'VariableProduct', salePrice?: Maybe<string>, regularPrice?: Maybe<string>, price?: Maybe<string>, id: string, databaseId: number, slug?: Maybe<string>, link?: Maybe<string>, name?: Maybe<string>, featured?: Maybe<boolean>, image?: Maybe<(
     { __typename?: 'MediaItem' }
     & MediaItemFragment
   )>, attributes?: Maybe<{ __typename?: 'ProductToProductAttributeConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'GlobalProductAttribute', id: string, label: string, name: string } | { __typename?: 'LocalProductAttribute', id: string, label: string, name: string }>>> }> };
@@ -12747,7 +12747,7 @@ export type ProductCardListFragment = { __typename?: 'ProductCategoryToProductCo
       & ProductCard_VariableProduct_Fragment
     )> }>>> };
 
-export type ProductVariationFragment = { __typename?: 'ProductVariation', id: string, regularPrice?: Maybe<string>, salePrice?: Maybe<string>, price?: Maybe<string>, status?: Maybe<string>, stockQuantity?: Maybe<number>, stockStatus?: Maybe<StockStatusEnum>, featuredImageId?: Maybe<string>, attributes?: Maybe<{ __typename?: 'ProductVariationToVariationAttributeConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'VariationAttribute', id: string, attributeId?: Maybe<number>, name?: Maybe<string>, label?: Maybe<string>, value?: Maybe<string> }>>> }> };
+export type ProductVariationFragment = { __typename?: 'ProductVariation', id: string, databaseId: number, regularPrice?: Maybe<string>, salePrice?: Maybe<string>, price?: Maybe<string>, status?: Maybe<string>, stockQuantity?: Maybe<number>, stockStatus?: Maybe<StockStatusEnum>, featuredImageId?: Maybe<string>, attributes?: Maybe<{ __typename?: 'ProductVariationToVariationAttributeConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'VariationAttribute', id: string, attributeId?: Maybe<number>, name?: Maybe<string>, label?: Maybe<string>, value?: Maybe<string> }>>> }> };
 
 export type TermNode_Category_Fragment = { __typename: 'Category', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> };
 

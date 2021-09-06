@@ -1,6 +1,7 @@
 import {
   ProductPageQuery,
   ProductVariationFragment,
+  StockStatusEnum,
 } from '../generated/graphql'
 import { notEmpty } from '../utils'
 import { equals, groupBy, uniqBy } from 'ramda'
@@ -9,6 +10,7 @@ import { useMemo, useState } from 'react'
 import clsx from 'clsx'
 import { IconShoppingCart } from '@tabler/icons'
 import { taxonomiesMap } from '../config'
+import { useCart } from '../hooks/useCart'
 
 function extractOptionTypes(product?: ProductPageQuery['product'] | null) {
   if (product?.__typename !== 'VariableProduct') {
@@ -41,6 +43,7 @@ export function VariableProductOrderForm({
 }: {
   product: ProductPageQuery['product'] | null
 }) {
+  const { addItem } = useCart()
   const [optionValues, setOptionValues] = useState<Record<string, string>>({})
   const [variation, setVariation] = useState<ProductVariationFragment | null>()
   const tmp = useMemo(() => extractOptionTypes(product), [product])
@@ -48,6 +51,8 @@ export function VariableProductOrderForm({
     return null
   }
   const { option_types, variations } = tmp
+  const disabled =
+    !variation || variation.stockStatus === StockStatusEnum.OutOfStock
 
   return (
     <div>
@@ -100,13 +105,32 @@ export function VariableProductOrderForm({
       {variation ? (
         <div>
           <ProductPrice entity={variation} />
-          <button
-            disabled={!!variation}
-            className="inline-flex items-center bg-rose-700 hover:bg-rose-800 shadow-sm hover:shadow-lg rounded text-white px-4 py-2"
+          <div>Stock: {variation.stockStatus}</div>
+          <form
+            className="flex"
+            onSubmit={async (e) => {
+              e.preventDefault()
+              const formData = new FormData(e.target as HTMLFormElement)
+              const quantity = parseInt(formData.get('quantity') as string, 10)
+              await addItem(variation.databaseId, quantity)
+              // TODO: Show notification
+            }}
           >
-            <IconShoppingCart />
-            <span className="ml-2">Thêm vào giỏ</span>
-          </button>
+            <input
+              className="border block p-1 w-24 mr-4"
+              type="number"
+              name="quantity"
+              defaultValue={1}
+              required
+            />
+            <button
+              disabled={disabled}
+              className="inline-flex items-center bg-rose-700 hover:bg-rose-800 shadow-sm hover:shadow-lg rounded text-white px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <IconShoppingCart />
+              <span className="ml-2">Thêm vào giỏ</span>
+            </button>
+          </form>
         </div>
       ) : (
         <div>Vui lòng chọn tùy chọn</div>

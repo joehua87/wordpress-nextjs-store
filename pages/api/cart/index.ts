@@ -1,5 +1,5 @@
 import { NextApiHandler } from 'next'
-import { storeEndpoint } from '../../config'
+import { storeEndpoint } from '../../../config'
 
 const handler: NextApiHandler = async (req, res) => {
   const response = await fetch(`${storeEndpoint}/cart`, {

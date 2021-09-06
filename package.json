@@ -29,8 +29,8 @@
     "react-dom": "npm:@preact/compat@^17.0.2",
     "react-ssr-prepass": "npm:preact-ssr-prepass@^1.2.0",
     "sharp": "^0.29.0",
-    "swr": "^1.0.0",
-    "topbar": "^1.0.1"
+    "topbar": "^1.0.1",
+    "zustand": "^3.5.10"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.2.1",

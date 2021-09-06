@@ -4,6 +4,7 @@ import { MediaItemFragment } from './MediaItem'
 export const ProductCardFragment = gql`
   fragment ProductCard on Product {
     id
+    databaseId
     slug
     link
     name

@@ -3,6 +3,7 @@ import { gql } from '@urql/core'
 export const ProductVariationFragment = gql`
   fragment ProductVariation on ProductVariation {
     id
+    databaseId
     regularPrice
     salePrice
     price

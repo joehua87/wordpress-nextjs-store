@@ -14,6 +14,7 @@ import { VariableProductOrderForm } from '../../components/VariableProductOrderF
 
 const Product: NextPage<{ data: ProductPageQuery }> = ({ data }) => {
   const { product } = data
+
   if (!product) {
     return <div>Product not found</div>
   }
@@ -26,11 +27,11 @@ const Product: NextPage<{ data: ProductPageQuery }> = ({ data }) => {
   ).filter(notEmpty)
 
   return (
-    <div className="container">
+    <div className="container" key={product?.id}>
       <EntitySeo entity={product?.seo} />
       <div className="flex flex-wrap mt-4">
         <div className="w-full lg:w-3/5">
-          <ProductSlider key={product?.id} images={images} />
+          <ProductSlider images={images} />
         </div>
         <div className="w-full lg:w-2/5 lg:pl-4">
           <h1 className="text-2xl font-serif">{product?.name}</h1>
