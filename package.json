@@ -19,6 +19,7 @@
     "keen-slider": "^5.5.1",
     "next": "^11.1.2",
     "next-plugin-preact": "^3.0.6",
+    "node-cache": "^5.1.2",
     "preact": "^10.5.14",
     "preact-render-to-string": "^5.1.19",
     "qs": "^6.10.1",

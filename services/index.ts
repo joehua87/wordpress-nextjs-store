@@ -1,10 +1,10 @@
 import qs from 'qs'
 import { storeEndpoint } from '../config'
 import { AppQuery, TermNode } from '../generated/graphql'
+import NodeCache from 'node-cache'
 import {
   PriceRange,
   ProductAggregate,
-  ProductAggregateItem,
   ProductFilter,
   WooProductFilter,
 } from '../types'
@@ -65,10 +65,17 @@ function getTermsMapFromApp(app?: AppQuery | null) {
   }, {})
 }
 
+const cache = new NodeCache()
+
 export async function getAggregate(
   filter: ProductFilter,
   app?: AppQuery | null,
 ): Promise<ProductAggregate[]> {
+  const key = JSON.stringify(filter)
+  const cachedResult = cache.get<ProductAggregate[]>(key)
+  if (cachedResult) {
+    return cachedResult
+  }
   const termsMap = getTermsMapFromApp(app)
   const promises = Object.keys(map).map(async (key) => {
     const data = await getOneAggregate(filter, key)
@@ -82,7 +89,9 @@ export async function getAggregate(
       },
     }
   })
-  return Promise.all(promises)
+  const result = await Promise.all(promises)
+  cache.set(key, result, 300)
+  return result
 }
 
 export async function getOneAggregate(
