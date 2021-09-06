@@ -6,12 +6,7 @@ import { ProductCardFragment } from '../fragments/ProductCard'
 export const ProductPageQuery = gql`
   query ProductPage($slug: ID!) {
     product(id: $slug, idType: SLUG) {
-      id
-      slug
-      name
-      image {
-        ...MediaItem
-      }
+      ...ProductCard
       galleryImages {
         nodes {
           ...MediaItem
@@ -34,12 +29,10 @@ export const ProductPageQuery = gql`
           ...ProductCard
         }
       }
-      ... on SimpleProduct {
+      ... on VariableProduct {
         salePrice
         regularPrice
         price
-      }
-      ... on VariableProduct {
         variations {
           nodes {
             attributes {
@@ -51,11 +44,6 @@ export const ProductPageQuery = gql`
             }
           }
         }
-      }
-      ... on ExternalProduct {
-        salePrice
-        regularPrice
-        price
       }
     }
     __typename

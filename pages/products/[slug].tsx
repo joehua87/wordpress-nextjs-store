@@ -9,6 +9,7 @@ import { queries } from '../../queries/queries'
 import ProductSlider from '../../components/ProductSlider'
 import { ProductCardList } from '../../components/ProductCardList'
 import { uniqBy } from 'ramda'
+import { ProductPrice } from '../../components/ProductPrice'
 
 const Product: NextPage<{ data: ProductPageQuery }> = ({ data }) => {
   const relatedProducts = data.product?.related?.nodes?.filter(notEmpty)
@@ -26,6 +27,7 @@ const Product: NextPage<{ data: ProductPageQuery }> = ({ data }) => {
         </div>
         <div className="w-full lg:w-2/5 lg:pl-4">
           <h1 className="text-2xl font-serif">{data.product?.name}</h1>
+          {data.product && <ProductPrice entity={data.product} />}
         </div>
       </div>
       {relatedProducts && (
