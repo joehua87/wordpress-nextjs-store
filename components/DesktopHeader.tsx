@@ -28,6 +28,9 @@ export function DesktopHeader() {
         <Link href="/search">
           <a className="ml-2">Tìm kiếm</a>
         </Link>
+        <Link href="/cart">
+          <a className="ml-2">Giỏ hàng</a>
+        </Link>
       </nav>
     </header>
   )
