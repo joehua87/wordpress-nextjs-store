@@ -1,3 +1,5 @@
+import { TermNode } from './generated/graphql'
+
 export interface GalleryItem {
   id: string | null
   src: string | null
@@ -25,16 +27,20 @@ export interface PriceRange {
 }
 
 export interface AttributeCount {
-  term: number
+  term: TermNode
   count: number
 }
 
-export interface ProductAggregate {
-  price_range: PriceRange
+export interface ProductAggregateItem {
   attribute_counts: AttributeCount[]
+  price_range?: PriceRange
   rating_counts?: any
 }
 
+export interface ProductAggregate {
+  key: string
+  data: ProductAggregateItem
+}
 export interface ProductFilter {
   category?: number[]
   gender?: number[]
@@ -42,9 +48,9 @@ export interface ProductFilter {
   color?: number[]
 }
 
-export interface ProductFilter {
-  category?: number[]
-  gender?: number[]
+export interface WooProductFilter {
+  category?: string
+  gender?: string
   attributes?: {
     attribute: string
     operator: 'in' | 'and'

@@ -1,4 +1,5 @@
 import { gql } from '@urql/core'
+import { TermNodeFragment } from '../fragments/TermNode'
 
 export const AppQuery = gql`
   query App {
@@ -18,12 +19,9 @@ export const AppQuery = gql`
       }
     ) {
       nodes {
-        id
-        slug
-        name
-        termTaxonomyId
-        __typename
+        ...TermNode
       }
     }
   }
+  ${TermNodeFragment}
 `

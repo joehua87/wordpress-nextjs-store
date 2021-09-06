@@ -12747,10 +12747,67 @@ export type ProductCardListFragment = { __typename?: 'ProductCategoryToProductCo
       & ProductCard_VariableProduct_Fragment
     )> }>>> };
 
+export type TermNode_Category_Fragment = { __typename: 'Category', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> };
+
+export type TermNode_Gender_Fragment = { __typename: 'Gender', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> };
+
+export type TermNode_PaColor_Fragment = { __typename: 'PaColor', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> };
+
+export type TermNode_PaSize_Fragment = { __typename: 'PaSize', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> };
+
+export type TermNode_PostFormat_Fragment = { __typename: 'PostFormat', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> };
+
+export type TermNode_ProductCategory_Fragment = { __typename: 'ProductCategory', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> };
+
+export type TermNode_ProductTag_Fragment = { __typename: 'ProductTag', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> };
+
+export type TermNode_ProductType_Fragment = { __typename: 'ProductType', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> };
+
+export type TermNode_ShippingClass_Fragment = { __typename: 'ShippingClass', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> };
+
+export type TermNode_Tag_Fragment = { __typename: 'Tag', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> };
+
+export type TermNode_VisibleProduct_Fragment = { __typename: 'VisibleProduct', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> };
+
+export type TermNodeFragment = TermNode_Category_Fragment | TermNode_Gender_Fragment | TermNode_PaColor_Fragment | TermNode_PaSize_Fragment | TermNode_PostFormat_Fragment | TermNode_ProductCategory_Fragment | TermNode_ProductTag_Fragment | TermNode_ProductType_Fragment | TermNode_ShippingClass_Fragment | TermNode_Tag_Fragment | TermNode_VisibleProduct_Fragment;
+
 export type AppQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AppQuery = { __typename?: 'RootQuery', config?: Maybe<{ __typename?: 'Config', content?: Maybe<string> }>, allSettings?: Maybe<{ __typename?: 'Settings', generalSettingsTitle?: Maybe<string>, generalSettingsDescription?: Maybe<string> }>, terms?: Maybe<{ __typename?: 'RootQueryToTermNodeConnection', nodes?: Maybe<Array<Maybe<{ __typename: 'Category', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> } | { __typename: 'Gender', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> } | { __typename: 'PaColor', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> } | { __typename: 'PaSize', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> } | { __typename: 'PostFormat', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> } | { __typename: 'ProductCategory', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> } | { __typename: 'ProductTag', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> } | { __typename: 'ProductType', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> } | { __typename: 'ShippingClass', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> } | { __typename: 'Tag', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> } | { __typename: 'VisibleProduct', id: string, slug?: Maybe<string>, name?: Maybe<string>, termTaxonomyId?: Maybe<number> }>>> }> };
+export type AppQuery = { __typename?: 'RootQuery', config?: Maybe<{ __typename?: 'Config', content?: Maybe<string> }>, allSettings?: Maybe<{ __typename?: 'Settings', generalSettingsTitle?: Maybe<string>, generalSettingsDescription?: Maybe<string> }>, terms?: Maybe<{ __typename?: 'RootQueryToTermNodeConnection', nodes?: Maybe<Array<Maybe<(
+      { __typename?: 'Category' }
+      & TermNode_Category_Fragment
+    ) | (
+      { __typename?: 'Gender' }
+      & TermNode_Gender_Fragment
+    ) | (
+      { __typename?: 'PaColor' }
+      & TermNode_PaColor_Fragment
+    ) | (
+      { __typename?: 'PaSize' }
+      & TermNode_PaSize_Fragment
+    ) | (
+      { __typename?: 'PostFormat' }
+      & TermNode_PostFormat_Fragment
+    ) | (
+      { __typename?: 'ProductCategory' }
+      & TermNode_ProductCategory_Fragment
+    ) | (
+      { __typename?: 'ProductTag' }
+      & TermNode_ProductTag_Fragment
+    ) | (
+      { __typename?: 'ProductType' }
+      & TermNode_ProductType_Fragment
+    ) | (
+      { __typename?: 'ShippingClass' }
+      & TermNode_ShippingClass_Fragment
+    ) | (
+      { __typename?: 'Tag' }
+      & TermNode_Tag_Fragment
+    ) | (
+      { __typename?: 'VisibleProduct' }
+      & TermNode_VisibleProduct_Fragment
+    )>>> }> };
 
 export type GenderPageQueryVariables = Exact<{
   slug: Scalars['String'];

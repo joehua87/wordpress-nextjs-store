@@ -12,11 +12,7 @@ import {
 import { edgesToList, fetchData, notEmpty } from '../utils'
 import { queries } from '../queries/queries'
 import { getAggregate } from '../services'
-import {
-  ProductFilter as WordpressProductFilter,
-  ProductAggregate,
-  ProductFilter,
-} from '../types'
+import { ProductAggregate, ProductFilter } from '../types'
 import { Drilldown } from '../components/Drilldown'
 import { pickBy } from 'ramda'
 import { IconFilter, IconSearch, IconX } from '@tabler/icons'
@@ -24,10 +20,10 @@ import { useState } from 'react'
 
 const Search: NextPage<{
   data: SearchPageQuery
-  aggregate: ProductAggregate
+  aggregate: ProductAggregate[]
   app: AppQuery
   filter: ProductFilter
-}> = ({ app, data, aggregate, filter }) => {
+}> = ({ data, aggregate, filter }) => {
   const [isShowFilter, setIsShowFilter] = useState(false)
 
   return (
@@ -53,7 +49,7 @@ const Search: NextPage<{
       </div>
       <div className="flex items-start">
         <div className="w-40 flex-none top-0 sticky mr-4 hidden lg:block">
-          <Drilldown app={app} aggregate={aggregate} filter={filter} />
+          <Drilldown aggregate={aggregate} filter={filter} />
         </div>
         <div className="flex-auto">
           <div className="p-2 bg-rose-100 mb-2 rounded flex items-center justify-between">
@@ -78,7 +74,7 @@ const Search: NextPage<{
               <IconX />
             </button>
           </div>
-          <Drilldown app={app} aggregate={aggregate} filter={filter} />
+          <Drilldown aggregate={aggregate} filter={filter} />
         </div>
       )}
     </div>
@@ -102,32 +98,17 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const size = urlQueryItemToIntArray(query.size)
   const color = urlQueryItemToIntArray(query.color)
 
-  const filter: WordpressProductFilter = {
-    attributes: [],
-  }
+  const filter: ProductFilter = pickBy((x) => !!x, {
+    category,
+    gender,
+    size,
+    color,
+  })
 
-  if (category) {
-    filter.category = category
-  }
-  if (gender) {
-    filter.gender = gender
-  }
-  if (size) {
-    filter.attributes?.push({
-      attribute: 'pa_size',
-      operator: 'in',
-      term_id: size,
-    })
-  }
-  if (color) {
-    filter.attributes?.push({
-      attribute: 'pa_color',
-      operator: 'in',
-      term_id: color,
-    })
-  }
-
-  const aggregate = await getAggregate(filter)
+  const { data: app } = await fetchData<AppQuery, AppQueryVariables>(
+    queries.AppQuery,
+  )
+  const aggregate = await getAggregate(filter, app)
 
   const { data, error } = await fetchData<
     SearchPageQuery,
@@ -157,12 +138,11 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       },
     },
   })
-  const app = await fetchData<AppQuery, AppQueryVariables>(queries.AppQuery)
   return {
     props: data
       ? {
           data,
-          app: app.data,
+          app,
           filter: pickBy((x) => !!x, { category, gender, size, color }),
           aggregate,
         }
