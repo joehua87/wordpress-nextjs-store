@@ -15,6 +15,8 @@ export const ProductPageQuery = gql`
       attributes {
         nodes {
           id
+          attributeId
+          name
           label
           variation
           visible

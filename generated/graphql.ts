@@ -12868,7 +12868,7 @@ export type ProductPageQuery = { __typename: 'RootQuery', product?: Maybe<(
     { __typename?: 'ExternalProduct', galleryImages?: Maybe<{ __typename?: 'ProductToMediaItemConnection', nodes?: Maybe<Array<Maybe<(
         { __typename?: 'MediaItem' }
         & MediaItemFragment
-      )>>> }>, attributes?: Maybe<{ __typename?: 'ProductToProductAttributeConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'GlobalProductAttribute', id: string, label: string, variation: boolean, visible: boolean, options?: Maybe<Array<Maybe<string>>> } | { __typename?: 'LocalProductAttribute', id: string, label: string, variation: boolean, visible: boolean, options?: Maybe<Array<Maybe<string>>> }>>> }>, seo?: Maybe<(
+      )>>> }>, attributes?: Maybe<{ __typename?: 'ProductToProductAttributeConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'GlobalProductAttribute', id: string, attributeId: number, name: string, label: string, variation: boolean, visible: boolean, options?: Maybe<Array<Maybe<string>>> } | { __typename?: 'LocalProductAttribute', id: string, attributeId: number, name: string, label: string, variation: boolean, visible: boolean, options?: Maybe<Array<Maybe<string>>> }>>> }>, seo?: Maybe<(
       { __typename?: 'PostTypeSEO' }
       & EntitySeoFragment
     )>, related?: Maybe<{ __typename?: 'ProductToProductConnection', nodes?: Maybe<Array<Maybe<(
@@ -12889,7 +12889,7 @@ export type ProductPageQuery = { __typename: 'RootQuery', product?: Maybe<(
     { __typename?: 'GroupProduct', galleryImages?: Maybe<{ __typename?: 'ProductToMediaItemConnection', nodes?: Maybe<Array<Maybe<(
         { __typename?: 'MediaItem' }
         & MediaItemFragment
-      )>>> }>, attributes?: Maybe<{ __typename?: 'ProductToProductAttributeConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'GlobalProductAttribute', id: string, label: string, variation: boolean, visible: boolean, options?: Maybe<Array<Maybe<string>>> } | { __typename?: 'LocalProductAttribute', id: string, label: string, variation: boolean, visible: boolean, options?: Maybe<Array<Maybe<string>>> }>>> }>, seo?: Maybe<(
+      )>>> }>, attributes?: Maybe<{ __typename?: 'ProductToProductAttributeConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'GlobalProductAttribute', id: string, attributeId: number, name: string, label: string, variation: boolean, visible: boolean, options?: Maybe<Array<Maybe<string>>> } | { __typename?: 'LocalProductAttribute', id: string, attributeId: number, name: string, label: string, variation: boolean, visible: boolean, options?: Maybe<Array<Maybe<string>>> }>>> }>, seo?: Maybe<(
       { __typename?: 'PostTypeSEO' }
       & EntitySeoFragment
     )>, related?: Maybe<{ __typename?: 'ProductToProductConnection', nodes?: Maybe<Array<Maybe<(
@@ -12910,7 +12910,7 @@ export type ProductPageQuery = { __typename: 'RootQuery', product?: Maybe<(
     { __typename?: 'SimpleProduct', galleryImages?: Maybe<{ __typename?: 'ProductToMediaItemConnection', nodes?: Maybe<Array<Maybe<(
         { __typename?: 'MediaItem' }
         & MediaItemFragment
-      )>>> }>, attributes?: Maybe<{ __typename?: 'ProductToProductAttributeConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'GlobalProductAttribute', id: string, label: string, variation: boolean, visible: boolean, options?: Maybe<Array<Maybe<string>>> } | { __typename?: 'LocalProductAttribute', id: string, label: string, variation: boolean, visible: boolean, options?: Maybe<Array<Maybe<string>>> }>>> }>, seo?: Maybe<(
+      )>>> }>, attributes?: Maybe<{ __typename?: 'ProductToProductAttributeConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'GlobalProductAttribute', id: string, attributeId: number, name: string, label: string, variation: boolean, visible: boolean, options?: Maybe<Array<Maybe<string>>> } | { __typename?: 'LocalProductAttribute', id: string, attributeId: number, name: string, label: string, variation: boolean, visible: boolean, options?: Maybe<Array<Maybe<string>>> }>>> }>, seo?: Maybe<(
       { __typename?: 'PostTypeSEO' }
       & EntitySeoFragment
     )>, related?: Maybe<{ __typename?: 'ProductToProductConnection', nodes?: Maybe<Array<Maybe<(
@@ -12931,7 +12931,7 @@ export type ProductPageQuery = { __typename: 'RootQuery', product?: Maybe<(
     { __typename?: 'VariableProduct', salePrice?: Maybe<string>, regularPrice?: Maybe<string>, price?: Maybe<string>, variations?: Maybe<{ __typename?: 'VariableProductToProductVariationConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'ProductVariation', attributes?: Maybe<{ __typename?: 'ProductVariationToVariationAttributeConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'VariationAttribute', id: string, label?: Maybe<string>, value?: Maybe<string> }>>> }> }>>> }>, galleryImages?: Maybe<{ __typename?: 'ProductToMediaItemConnection', nodes?: Maybe<Array<Maybe<(
         { __typename?: 'MediaItem' }
         & MediaItemFragment
-      )>>> }>, attributes?: Maybe<{ __typename?: 'ProductToProductAttributeConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'GlobalProductAttribute', id: string, label: string, variation: boolean, visible: boolean, options?: Maybe<Array<Maybe<string>>> } | { __typename?: 'LocalProductAttribute', id: string, label: string, variation: boolean, visible: boolean, options?: Maybe<Array<Maybe<string>>> }>>> }>, seo?: Maybe<(
+      )>>> }>, attributes?: Maybe<{ __typename?: 'ProductToProductAttributeConnection', nodes?: Maybe<Array<Maybe<{ __typename?: 'GlobalProductAttribute', id: string, attributeId: number, name: string, label: string, variation: boolean, visible: boolean, options?: Maybe<Array<Maybe<string>>> } | { __typename?: 'LocalProductAttribute', id: string, attributeId: number, name: string, label: string, variation: boolean, visible: boolean, options?: Maybe<Array<Maybe<string>>> }>>> }>, seo?: Maybe<(
       { __typename?: 'PostTypeSEO' }
       & EntitySeoFragment
     )>, related?: Maybe<{ __typename?: 'ProductToProductConnection', nodes?: Maybe<Array<Maybe<(
