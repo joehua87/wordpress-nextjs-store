@@ -8,17 +8,21 @@ import { fetchData, notEmpty } from '../../utils'
 import { queries } from '../../queries/queries'
 import ProductSlider from '../../components/ProductSlider'
 import { ProductCardList } from '../../components/ProductCardList'
+import { uniqBy } from 'ramda'
 
 const Product: NextPage<{ data: ProductPageQuery }> = ({ data }) => {
   const relatedProducts = data.product?.related?.nodes?.filter(notEmpty)
+  const images = uniqBy(
+    (x) => x?.id,
+    [...(data.product?.galleryImages?.nodes || []), data.product?.image],
+  ).filter(notEmpty)
+
   return (
     <div className="container">
       <EntitySeo entity={data.product?.seo} />
       <div className="flex flex-wrap mt-4">
         <div className="w-full lg:w-3/5">
-          <ProductSlider
-            images={data.product?.galleryImages?.nodes?.filter(notEmpty) || []}
-          />
+          <ProductSlider key={data.product?.id} images={images} />
         </div>
         <div className="w-full lg:w-2/5 lg:pl-4">
           <h1 className="text-2xl font-serif">{data.product?.name}</h1>
