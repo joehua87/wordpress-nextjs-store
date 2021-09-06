@@ -1,11 +1,14 @@
 import clsx from 'clsx'
-import { ProductCardFragment } from '../generated/graphql'
+import {
+  ProductCardFragment,
+  ProductVariationFragment,
+} from '../generated/graphql'
 
 export function ProductPrice({
   entity,
   className,
 }: {
-  entity: ProductCardFragment
+  entity: ProductCardFragment | ProductVariationFragment
   className?: string
 }) {
   if (entity.__typename === 'GroupProduct') {

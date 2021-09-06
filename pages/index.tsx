@@ -19,7 +19,7 @@ const Home: NextPage<{ data: THomePageQuery; blocks: Record<string, any> }> = ({
   data,
   blocks,
 }) => {
-  const slider = blocks['ahihi'] as Gallery
+  const slider = blocks['home-slider'] as Gallery
 
   return (
     <>

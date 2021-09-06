@@ -1,20 +1,9 @@
-import { groupBy, pickBy } from 'ramda'
-import { AppQuery, TaxonomyEnum } from '../generated/graphql'
-import { notEmpty } from '../utils'
+import { pickBy } from 'ramda'
 import { ProductFilter, ProductAggregate } from '../types'
 import { useRouter } from 'next/router'
 import { DefaultDrilldown } from './DefaultDrilldown'
 import { SizeDrilldown } from './SizeDrilldown'
-
-const taxonomiesMap: Record<
-  string,
-  { code: 'category' | 'gender' | 'size' | 'color'; name: string }
-> = {
-  product_cat: { code: 'category', name: 'Danh mục' },
-  gender: { code: 'gender', name: 'Giới tính' },
-  pa_size: { code: 'size', name: 'Kích thước' },
-  pa_color: { code: 'color', name: 'Màu' },
-}
+import { taxonomiesMap } from '../config'
 
 export function Drilldown({
   filter,

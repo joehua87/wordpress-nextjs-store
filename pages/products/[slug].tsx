@@ -10,12 +10,10 @@ import ProductSlider from '../../components/ProductSlider'
 import { ProductCardList } from '../../components/ProductCardList'
 import { uniqBy } from 'ramda'
 import { ProductPrice } from '../../components/ProductPrice'
-import { useRouter } from 'next/router'
+import { VariableProductOrderForm } from '../../components/VariableProductOrderForm'
 
 const Product: NextPage<{ data: ProductPageQuery }> = ({ data }) => {
   const { product } = data
-  const router = useRouter()
-
   if (!product) {
     return <div>Product not found</div>
   }
@@ -37,28 +35,9 @@ const Product: NextPage<{ data: ProductPageQuery }> = ({ data }) => {
         <div className="w-full lg:w-2/5 lg:pl-4">
           <h1 className="text-2xl font-serif">{product?.name}</h1>
           {product && <ProductPrice entity={product} />}
-          {product?.attributes?.nodes?.filter(notEmpty).map((attr) => (
-            <div key={attr.id}>
-              <div className="font-bold">{attr.label}</div>
-              <div className="flex">
-                {attr.options?.filter(notEmpty)?.map((item) => (
-                  <div
-                    className="mr-1 mb-1 border px-2 py-1 cursor-pointer"
-                    key={item}
-                    // onClick={() => {
-                    //   router.replace({
-                    //     pathname: router.pathname,
-                    //     href: router.asPath,
-                    //     query: {},
-                    //   })
-                    // }}
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+          {product.__typename === 'VariableProduct' && (
+            <VariableProductOrderForm product={product} />
+          )}
         </div>
       </div>
       {relatedProducts && (

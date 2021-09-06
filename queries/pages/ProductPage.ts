@@ -2,6 +2,7 @@ import { gql } from '@urql/core'
 import { EntitySeoFragment } from '../fragments/EntitySeo'
 import { MediaItemFragment } from '../fragments/MediaItem'
 import { ProductCardFragment } from '../fragments/ProductCard'
+import { ProductVariationFragment } from '../fragments/ProductVariation'
 
 export const ProductPageQuery = gql`
   query ProductPage($slug: ID!) {
@@ -16,6 +17,7 @@ export const ProductPageQuery = gql`
         nodes {
           id
           attributeId
+          scope
           name
           label
           variation
@@ -37,13 +39,7 @@ export const ProductPageQuery = gql`
         price
         variations {
           nodes {
-            attributes {
-              nodes {
-                id
-                label
-                value
-              }
-            }
+            ...ProductVariation
           }
         }
       }
@@ -53,4 +49,5 @@ export const ProductPageQuery = gql`
   ${MediaItemFragment}
   ${EntitySeoFragment}
   ${ProductCardFragment}
+  ${ProductVariationFragment}
 `
