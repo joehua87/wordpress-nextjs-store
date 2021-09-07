@@ -8,7 +8,7 @@ export function ProductCard({ entity }: { entity: ProductCardFragment }) {
   const href = entity.link && new URL(entity.link).pathname
   return (
     <Link href={href as string}>
-      <a className="product-card border-2 border-transparent hover:border-blue-700 p-2 border-dashed">
+      <a className="product-card border-2 border-transparent hover:border-blue-700 p-2 border-dashed transition">
         <div className="relative aspect-w-1 aspect-h-1">
           <DewImage
             loading="lazy"
