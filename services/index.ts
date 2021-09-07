@@ -17,6 +17,10 @@ const map: Record<string, string[]> = {
   gender: ['pa_color', 'pa_size', 'product_cat'],
 }
 
+const taxonomyByQueryName: Record<string, string> = {
+  product_cat: 'category',
+}
+
 /**
  * Convert an UI filter object to Woocommerce REST filter
  */
@@ -90,7 +94,7 @@ export async function getAggregate(
     }
   })
   const result = await Promise.all(promises)
-  cache.set(key, result, 300)
+  cache.set(key, result, 600)
   return result
 }
 
@@ -105,7 +109,7 @@ export async function getOneAggregate(
   price_range?: PriceRange
   rating_counts?: any
 }> {
-  const tmp = { ...filter, [key]: undefined }
+  const tmp = { ...filter, [taxonomyByQueryName[key] || key]: undefined }
   const wooFilter = toWooFilter(tmp)
   const query = qs.stringify({
     ...wooFilter,
