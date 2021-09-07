@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.product-card:hover h3 {
+  @apply underline text-blue-600;
+}

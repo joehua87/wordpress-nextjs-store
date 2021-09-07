@@ -10,6 +10,7 @@ export const GenderPageQuery = gql`
           filters: [{ taxonomy: GENDER, terms: [$slug] }]
         }
       }
+      first: 200
     ) {
       edges {
         node {

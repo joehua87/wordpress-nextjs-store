@@ -19,7 +19,9 @@ export function ProductPrice({
       {entity.regularPrice !== entity.price && (
         <div className="mr-2 line-through">{entity.regularPrice}</div>
       )}
-      <div className="font-bold">{entity.price}</div>
+      <div className="" style={{ color: '#015D59' }}>
+        {entity.price}
+      </div>
     </div>
   )
 }

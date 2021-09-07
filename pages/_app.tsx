@@ -1,4 +1,7 @@
 import '../styles/globals.css'
+import '../styles/rich-text.css'
+import '../styles/custom.css'
+
 import type { AppProps } from 'next/app'
 import Router from 'next/router'
 import { DesktopHeader } from '../components/DesktopHeader'

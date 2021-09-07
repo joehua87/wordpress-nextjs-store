@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.rich-text h2 {
+  @apply text-2xl lg:text-4xl leading-tight mb-8;
+}
+.rich-text h3 {
+  @apply text-xl lg:text-2xl leading-normal -mt-16 pt-20 mb-4;
+}
+.rich-text h4 {
+  @apply text-base leading-relaxed tracking-wide uppercase font-bold -mt-16 pt-20 mb-6;
+}
+.rich-text h5 {
+  @apply my-4 text-sm leading-relaxed uppercase;
+}
+.rich-text p {
+  @apply my-8 leading-loose text-gray-900;
+}
+.rich-text li {
+  @apply leading-loose;
+}
+.rich-text ul {
+  @apply mb-4 ml-6 list-disc;
+}
+.rich-text ol {
+  @apply mb-4 ml-6 list-decimal;
+}
+.rich-text li {
+  @apply leading-loose;
+}
+.rich-text blockquote {
+  @apply bg-blue-100 p-6 my-6;
+}
+.rich-text figure {
+  @apply my-10;
+}
+.rich-text img {
+  @apply w-full;
+}
+.rich-text figcaption {
+  @apply text-center px-1 py-2 text-sm text-gray-500;
+}
+.rich-text a {
+  @apply text-blue-700 font-sans;
+}
+/* .rich-text [data-component='youtube-video'] {
+  @apply mx-auto w-full;
+}
+.rich-text [data-element='iframe-wrapper'] {
+  @apply w-full relative aspect-w-16 aspect-h-9;
+}
+.rich-text [data-element='iframe-wrapper'] iframe {
+  @apply inset-0;
+} */
+/* When focus for edit */
+iframe.active,
+.rich-text img.active {
+  @apply ring;
+}
+
+.wp-block-media-text {
+  @apply flex flex-wrap w-full items-center;
+}
+.wp-block-media-text__media {
+  @apply w-full lg:w-1/2 flex-1;
+}
+.wp-block-media-text__content {
+  @apply lg:w-1/2 lg:pl-6;
+}
+.has-large-font-size {
+  @apply text-3xl;
+}
+.wp-block-media-text p {
+  @apply my-1;
+}
+.wp-block-buttons {
+  @apply flex flex-wrap;
+}
+.wp-block-button {
+  @apply px-4 py-2 rounded bg-blue-500 text-white hover:bg-blue-600 cursor-pointer transition ease-in duration-150 hover:shadow-lg;
+}
+.wp-block-button a {
+  @apply text-white;
+}
+.wp-block-media-text.has-media-on-the-right .wp-block-media-text__media {
+  @apply order-1;
+}
+.wp-block-media-text.has-media-on-the-right .wp-block-media-text__content {
+  @apply order-first lg:pr-6;
+}
+
+/* .wp-block-gallery {
+  @apply grid lg:grid-cols-3 gap-4;
+} */
+.blocks-gallery-grid {
+  @apply grid lg:grid-cols-3 gap-4 list-none;
+}
+ul.blocks-gallery-grid {
+  @apply list-none;
+}
+/* .columns-3 {
+  @apply grid lg:grid-cols-3;
+} */
+/* .has-media-on-the-right {
+
+} */
+
+figure.wp-block-video {
+  @apply mb-4;
+}
+video {
+  @apply mx-auto w-full;
+}

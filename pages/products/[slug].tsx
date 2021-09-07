@@ -27,18 +27,27 @@ const Product: NextPage<{ data: ProductPageQuery }> = ({ data }) => {
   ).filter(notEmpty)
 
   return (
-    <div className="container" key={product?.id}>
-      <EntitySeo entity={product?.seo} />
+    <div className="container mx-auto">
+      <EntitySeo entity={data.product?.seo} />
       <div className="flex flex-wrap mt-4">
         <div className="w-full lg:w-3/5">
           <ProductSlider images={images} />
         </div>
         <div className="w-full lg:w-2/5 lg:pl-4">
-          <h1 className="text-2xl font-serif">{product?.name}</h1>
-          {product && <ProductPrice entity={product} />}
-          {product.__typename === 'VariableProduct' && (
-            <VariableProductOrderForm product={product} />
-          )}
+          <div className="border-b pb-2 border-gray-300">
+            <h1 className="text-3xl font-sans font-bold">
+              {data.product?.name}
+            </h1>
+            <div className="text-sm text-gray-600">
+              Mã sản phẩm: {data.product?.id}
+            </div>
+            <div className="flex justity-between">
+              {/* <ProductPrice className="text-sm" entity={data.produc} /> */}
+              <div className="italic text-xs text-gray-700">
+                *Đã bao gồm VAT
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       {relatedProducts && (
