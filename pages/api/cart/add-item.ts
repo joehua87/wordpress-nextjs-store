@@ -1,5 +1,6 @@
 import { NextApiHandler } from 'next'
 import { storeEndpoint } from '../../../config'
+import { parseSetCookie } from '../../../utils'
 
 const handler: NextApiHandler = async (req, res) => {
   const { id, quantity } = req.body
@@ -17,7 +18,13 @@ const handler: NextApiHandler = async (req, res) => {
       },
     },
   )
-  res.status(200).json(await response.json())
+
+  const cookie = parseSetCookie(response.headers)
+
+  res
+    .setHeader('set-cookie', cookie)
+    .status(200)
+    .json(await response.json())
 }
 
 export default handler

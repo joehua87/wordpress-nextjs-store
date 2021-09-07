@@ -19,3 +19,20 @@ export async function fetchData<T, V extends object>(
 ) {
   return client.query<T, V>(query, variables).toPromise()
 }
+
+export function parseSetCookie(headers: Headers) {
+  const v = headers.get('set-cookie')
+  if (!v) {
+    return []
+  }
+  return v.split(/, /g).reduce((acc: string[], item) => {
+    if (
+      item.match(/^\d{2}-\w{3}-\d{4}/) &&
+      acc[acc.length - 1].match(/expires=\w{3}$/)
+    ) {
+      acc[acc.length - 1] = acc[acc.length - 1] + ' ' + item
+      return acc
+    }
+    return [...acc, item]
+  }, [])
+}

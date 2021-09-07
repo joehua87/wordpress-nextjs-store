@@ -1,10 +1,8 @@
 import { NextApiHandler } from 'next'
 import { endpoint } from '../../config'
+import { parseSetCookie } from '../../utils'
 
 const handler: NextApiHandler = async (req, res) => {
-  //   const body = new FormData(req.body)
-  //   const username = body.get('username')
-  //   const password = body.get('password')
   const { username, password } = req.body
   console.log({ username, password })
   const response = await fetch(`${endpoint}/wp-login.php`, {
@@ -18,24 +16,7 @@ const handler: NextApiHandler = async (req, res) => {
     mode: 'cors',
     credentials: 'include',
   })
-  const cookie =
-    response.headers
-      .get('set-cookie')
-      ?.replace(/; secure/g, '')
-      ?.split(/, wordpress_/)
-      .map((x) => {
-        if (x.startsWith('wordpress_')) {
-          return x
-        }
-        return `wordpress_${x}`
-      }) || []
-  console.log(cookie)
-  //   response.headers.forEach((v, k) => {
-  //     if (k === 'set-cookie') {
-  //       cookie.push(v.replace(/; secure/g, ''))
-  //     }
-  //   })
-  //   console.log({ cookie })
+  const cookie = parseSetCookie(response.headers)
   res.setHeader('set-cookie', cookie).status(200).json({ name: 'John Doe' })
 }
 
