@@ -19,6 +19,14 @@ export const ProductCardFragment = gql`
         name
       }
     }
+    productCategories {
+      nodes {
+        databaseId
+        id
+        name
+        slug
+      }
+    }
     ... on SimpleProduct {
       salePrice
       regularPrice

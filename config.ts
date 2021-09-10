@@ -8,6 +8,6 @@ export const taxonomiesMap: Record<
 > = {
   product_cat: { code: 'category', name: 'Danh mục' },
   gender: { code: 'gender', name: 'Giới tính' },
-  pa_size: { code: 'size', name: 'Kích thước' },
+  pa_size: { code: 'size', name: 'Kích cỡ' },
   pa_color: { code: 'color', name: 'Màu' },
 }

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { DefaultDrilldown } from './DefaultDrilldown'
 import { SizeDrilldown } from './SizeDrilldown'
 import { taxonomiesMap } from '../config'
+import { IconChevronDown } from '@tabler/icons'
 
 export function Drilldown({
   filter,
@@ -22,8 +23,10 @@ export function Drilldown({
 
         return (
           <div key={key} className="mb-4">
-            <div className="bg-gray-200 px-2 py-0.5 flex justify-between">
-              <div className="font-bold text-sm">{name}</div>
+            <div className="border-b border-gray-300 px-2 py-0.5 my-3">
+              <div className="font-bold text-sm flex items-center flex justify-between w-full">
+                {name} <IconChevronDown className="w-4 h-4 ml-1" />
+              </div>
               {router.query[code] && (
                 <button
                   className="text-gray-700 text-sm"

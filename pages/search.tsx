@@ -47,6 +47,11 @@ const Search: NextPage<{
           <IconFilter />
         </button>
       </div>
+
+      <div className="font-bold text-3xl mb-2">Search page</div>
+      <div className="mb-4">
+        Tìm thấy {data.products?.pageInfo?.total} sản phẩm
+      </div>
       <div className="flex items-start">
         <div className="w-40 flex-none top-0 sticky mr-4 hidden lg:block">
           <Drilldown aggregate={aggregate} filter={filter} />
@@ -56,6 +61,7 @@ const Search: NextPage<{
             {data.products?.pageInfo?.total} products
             <div>TODO: Pagination</div>
           </div>
+          <h3 className="text-xl font-semibold mb-2">Bạn đang chọn</h3>
           <div className="p-2 rounded bg-yellow-100 mb-2">
             TODO: Removable filter goes here
           </div>

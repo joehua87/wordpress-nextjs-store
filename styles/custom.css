@@ -2,14 +2,4 @@
 @tailwind components;
 @tailwind utilities;
 
-.product-card:hover h3 {
-  @apply underline text-blue-600;
-}
-/* .product-card:hover {
-  @apply border-2 border-blue-700;
-} */
-
-.desktop-nav-lv-1 {
-  @apply font-semibold py-2.5 inline-flex items-center border-b-2 border-transparent hover:border-blue-900 transition ease-in duration-100 mx-3;
-  color: #003953;
-}
+/* #005b94 */

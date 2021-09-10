@@ -17,11 +17,9 @@ export function ProductPrice({
   return (
     <div className={clsx('flex', className)}>
       {entity.regularPrice !== entity.price && (
-        <div className="mr-2 line-through">{entity.regularPrice}</div>
+        <div className="">{entity.regularPrice}</div>
       )}
-      <div className="" style={{ color: '#015D59' }}>
-        {entity.price}
-      </div>
+      <div className="">{entity.price}</div>
     </div>
   )
 }

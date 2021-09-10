@@ -19,8 +19,14 @@ export function SizeDrilldown({
     item.attribute_counts,
   )
   return (
-    <div className="text-xs max-h-40 overflow-y-scroll">
-      <div className="grid grid-cols-3 gap-2">
+    <div
+      // className="text-xs max-h-40 overflow-y-scroll"
+      className=""
+    >
+      <div
+        // className="grid grid-cols-3 gap-2"
+        className=""
+      >
         {items.map((x) => {
           const termId = x.term.termTaxonomyId as number
           const isActive = currentItems.includes(termId)
@@ -29,8 +35,10 @@ export function SizeDrilldown({
             <div
               key={x.term.id}
               className={clsx(
-                'cursor-pointer border w-full aspect-w-4 aspect-h-3 relative font-bold text-gray-800',
-                isActive && 'border-rose-800 bg-rose-100 text-rose-800',
+                // 'cursor-pointer border w-full aspect-w-4 aspect-h-3 relative font-bold text-gray-800 rounded hover:border-blue-400 hover:text-blue-800 hover:bg-blue-50',
+                '',
+                // isActive && 'border-blue-400 bg-blue-50 text-blue-800',
+                isActive && '',
               )}
               onClick={() => {
                 const nextItems = currentItems?.includes(termId)
