@@ -9,26 +9,34 @@ import { ProductPrice } from './ProductPrice'
 export function ProductCard({ entity }: { entity: ProductCardFragment }) {
   const href = entity.link && new URL(entity.link).pathname
   return (
-    <Link href={href as string}>
-      <a className="">
-        <div className="relative aspect-w-3 aspect-h-4 bg-gray-50">
-          <DewImage
-            loading="lazy"
-            src={entity.image?.mediumUrl}
-            layout="fill"
-            alt={entity.name || undefined}
-            className="object-center object-contain"
-          />
-        </div>
-        <div className="my-2 text-blue-800 font-semibold text-sm">
-          {entity?.productCategories?.nodes?.filter(notEmpty).map((x) => (
-            <span key={x.id}>{x.name}</span>
-          ))}
-        </div>
-        <h3 className="mb-3 text-gray-900">{entity.name}</h3>
-
-        <ProductPrice className="" entity={entity} />
-      </a>
-    </Link>
+    <div>
+      <Link href={href as string}>
+        <a className="product-card-hover-effect">
+          <div className="relative aspect-w-1 aspect-h-1 bg-gray-50">
+            <DewImage
+              loading="lazy"
+              src={entity.image?.mediumUrl}
+              layout="fill"
+              alt={entity.name || undefined}
+              className="object-center object-contain"
+            />
+          </div>
+          <h5 className="my-2 text-sky-700 font-semibold text-sm">
+            {entity?.productCategories?.nodes?.filter(notEmpty).map((x) => (
+              <span key={x.id}>{x.name}</span>
+            ))}
+          </h5>
+          <h3 className="mb-3 text-gray-900 leading-snug w-3/4">
+            {entity.name}
+          </h3>
+          <ProductPrice className="" entity={entity} />
+        </a>
+      </Link>
+      <div className="my-2">
+        <button className="border-2 border-gray-200 px-2.5 py-1 rounded text-sm text-sky-700 font-semibold hover:border-gray-600 hover:text-sky-900 transition">
+          Quick Shop
+        </button>
+      </div>
+    </div>
   )
 }

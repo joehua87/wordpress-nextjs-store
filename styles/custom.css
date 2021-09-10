@@ -3,3 +3,29 @@
 @tailwind utilities;
 
 /* #005b94 */
+.product-card-hover-effect:hover img {
+  @apply transform scale-110 transition;
+}
+.product-card-hover-effect:hover h3 {
+  @apply underline text-sky-600 transition;
+}
+.product-card-hover-effect:hover h5 {
+  @apply underline text-sky-600 transition;
+}
+
+.custom-scrollbar {
+  overflow-y: auto;
+}
+.custom-scrollbar::-webkit-scrollbar {
+  -webkit-appearance: none;
+}
+.custom-scrollbar::-webkit-scrollbar:vertical {
+  width: 11px;
+}
+.custom-scrollbar::-webkit-scrollbar:horizontal {
+  height: 11px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply bg-sky-900;
+  border: 2px solid white;
+}

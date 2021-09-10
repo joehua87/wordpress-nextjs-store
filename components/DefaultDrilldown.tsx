@@ -19,7 +19,7 @@ export function DefaultDrilldown({
     item.attribute_counts,
   )
   return (
-    <div className="text-xs px-2 py-0.5 max-h-40 overflow-y-scroll">
+    <div className="text-xs py-0.5 max-h-40 overflow-y-scroll">
       {items.map((x) => {
         const termId = x.term.termTaxonomyId as number
         const isActive = currentItems.includes(termId)
@@ -28,7 +28,7 @@ export function DefaultDrilldown({
           <div key={x.term.id} className="flex">
             <div
               className={clsx(
-                'cursor-pointer flex items-center',
+                'cursor-pointer flex items-center hover:bg-gray-100 hover:text-sky-600 rounded w-full px-1.5 py-0.5 mb-0.5',
                 isActive && 'font-bold',
               )}
               onClick={() => {

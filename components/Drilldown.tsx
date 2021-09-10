@@ -44,7 +44,7 @@ export function Drilldown({
                 </button>
               )}
             </div>
-            <div className="text-xs py-0.5 max-h-40 overflow-y-scroll">
+            <div className="text-xs py-0.5 max-h-40 overflow-y-scroll custom-scrollbar">
               {code === 'size' ? (
                 <SizeDrilldown
                   item={data}

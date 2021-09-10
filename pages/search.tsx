@@ -56,7 +56,7 @@ const Search: NextPage<{
         <div className="w-40 flex-none top-0 sticky mr-4 hidden lg:block">
           <Drilldown aggregate={aggregate} filter={filter} />
         </div>
-        <div className="flex-auto">
+        <div className="flex-auto lg:ml-8">
           <div className="p-2 bg-rose-100 mb-2 rounded flex items-center justify-between">
             {data.products?.pageInfo?.total} products
             <div>TODO: Pagination</div>
