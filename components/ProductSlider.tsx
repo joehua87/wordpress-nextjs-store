@@ -46,7 +46,7 @@ export default function ProductSlider({
             key={x.id}
             className={clsx(
               'relative w-full aspect-w-1 aspect-h-1 mb-4 cursor-pointer shadow-sm',
-              idx === sliderIndex && 'ring ring-rose-500',
+              idx === sliderIndex && 'ring ring-sky-600',
             )}
             onClick={() => {
               slider?.moveToSlide(idx)

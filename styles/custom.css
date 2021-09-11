@@ -12,7 +12,6 @@
 .product-card-hover-effect:hover h5 {
   @apply underline text-sky-600 transition;
 }
-
 .custom-scrollbar {
   overflow-y: auto;
 }
@@ -28,4 +27,8 @@
 .custom-scrollbar::-webkit-scrollbar-thumb {
   @apply bg-sky-900;
   border: 2px solid white;
+}
+.desktop-nav-lv-1 {
+  @apply font-semibold px-1.5 py-2.5 inline-flex items-center border-b-2 border-transparent hover:border-blue-900 transition ease-in duration-100 mx-3;
+  color: #003953;
 }
