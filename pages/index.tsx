@@ -15,10 +15,11 @@ import React from 'react'
 import { Carousel } from '../components/Carousel'
 import { Gallery } from '../types'
 
-const Home: NextPage<{ data: THomePageQuery; blocks: Record<string, any> }> = ({
-  data,
-  blocks,
-}) => {
+const Home: NextPage<{
+  data: THomePageQuery
+  blocks: Record<string, any>
+  now: number
+}> = ({ data, blocks, now }) => {
   const slider = blocks['home-slider'] as Gallery
 
   return (
@@ -32,6 +33,7 @@ const Home: NextPage<{ data: THomePageQuery; blocks: Record<string, any> }> = ({
       </Head>
       <Carousel gallery={slider} />
       <div className="container">
+        <div>{new Date(now).toJSON()}</div>
         <div className="mt-4">
           {data.productCategories?.edges?.map((item) => {
             if (!item?.node?.products) {
@@ -68,5 +70,8 @@ export const getStaticProps: GetStaticProps = async () => {
   const blocks = parseBlocks(data?.config?.content)
   // const snap2 = Date.now()
   // console.log('parse', snap2 - snap1)
-  return { props: data ? { data, blocks } : { error }, revalidate: 10 }
+  return {
+    props: data ? { data, blocks, now: Date.now() } : { error },
+    revalidate: 10,
+  }
 }

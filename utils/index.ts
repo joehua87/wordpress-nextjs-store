@@ -11,13 +11,16 @@ export function edgesToList<T>(data?: { edges?: any[] | null } | null): T[] {
   return data?.edges?.map((x: any) => x.node)?.filter(notEmpty) || []
 }
 
-const client = new Client({ url: graphqlEndpoint })
+const client = new Client({
+  url: graphqlEndpoint,
+  requestPolicy: 'network-only',
+})
 
 export async function fetchData<T, V extends object>(
   query: TypedDocumentNode,
   variables?: V,
 ) {
-  return client.query<T, V>(query, variables).toPromise()
+  return client.query<T, V>(query, variables, {}).toPromise()
 }
 
 export function parseSetCookie(headers: Headers) {
